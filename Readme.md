@@ -1,7 +1,7 @@
 # Личный проект «Кексобукинг»
 
 * Студент: [Tanja](https://up.htmlacademy.ru/javascript/22/user/1621659).
-* Наставник: `Павел Лукин`.
+* Наставник: [Павел Лукин](https://htmlacademy.ru/profile/id1313529).
 
 ---
 
