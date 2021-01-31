@@ -1,5 +1,8 @@
 // Функция, возвращающая случайное целое число из переданного диапазона включительно.
 
+const min;
+const max;
+
 function getRandomIntInclusive(min, max) {
   if (min >= max || min < 0 || max < 0) {
     return null;
@@ -9,6 +12,8 @@ function getRandomIntInclusive(min, max) {
 getRandomIntInclusive(min, max);
 
 // Функция, возвращающая случайное число с плавающей точкой из переданного диапазона включительно.
+
+const numbersAfterPoint;
 
 function getRandomFloatInclusive(min, max, numbersAfterPoint) {
   if (min >= max || min < 0 || max < 0) {
