@@ -60,3 +60,9 @@ const getRandomFloatInclusive = (min, max, numbersAfterPoint) => {
   return result.toFixed(numbersAfterPoint);
 }
 getRandomFloatInclusive(5.10, 5.2, 2);
+
+// Функция, возвращающая случайный элемент массива.
+const getRandomArrayElement = (elements) => {
+  const randomArrayIndex = getRandomIntInclusive(0, elements.length - 1);
+  return elements[randomArrayIndex];
+};
