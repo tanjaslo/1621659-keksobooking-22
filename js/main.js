@@ -66,3 +66,18 @@ const getRandomArrayElement = (elements) => {
   const randomArrayIndex = getRandomIntInclusive(0, elements.length - 1);
   return elements[randomArrayIndex];
 };
+
+// Тасование Фишера — Йетса https://learn.javascript.ru/task/shuffle
+const shuffle = (array) => {
+  for (let i = array.length - 1; i > 0; i--) {
+    let j = Math.floor(Math.random() * (i + 1));
+    [array[i], array[j]] = [array[j], array[i]];
+  }
+};
+
+// Функция, возвращающая массив случайной длины из значений массива (значения исходного массива предварительно тасуются).
+const getRandomArray = (newArray) => {
+  const randomArrayIndex = getRandomIntInclusive(0, newArray.length - 1);
+  shuffle(newArray);
+  return newArray.slice(randomArrayIndex);
+};
