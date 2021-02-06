@@ -81,3 +81,32 @@ const getRandomArray = (newArray) => {
   shuffle(newArray);
   return newArray.slice(randomArrayIndex);
 };
+
+const SIMILAR_OFFER_COUNT = 10;
+
+const createOffer = () => {
+  return {
+    author: {
+      avatar: `img/avatars/user0${getRandomIntInclusive(1, 8)}.png`,
+    },
+    offer: {
+      title: getRandomArrayElement(OFFER_TITLES),
+      address: `${location.x}, ${location.y}`,
+      price: getRandomIntInclusive(10,2000),
+      type: getRandomArrayElement(HOUSING_TYPES),
+      rooms: getRandomIntInclusive(1,200),
+      guests: getRandomIntInclusive(1,450),
+      checkin: getRandomArrayElement(CHECK_TIME),
+      checkout: getRandomArrayElement(CHECK_TIME),
+      features: getRandomArray(FEATURES),
+      description: getRandomArrayElement(OFFER_DESCRIPTIONS),
+      photos: getRandomArray(PHOTOS),
+    },
+    location: {
+      x: getRandomFloatInclusive(35.65000, 35.70000, 5),
+      y: getRandomFloatInclusive(139.70000, 139.80000, 5),
+    },
+  };
+};
+
+const createSimilarOffers = new Array(SIMILAR_OFFER_COUNT).fill(null).map(() => createOffer());
