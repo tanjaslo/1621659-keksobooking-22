@@ -42,14 +42,18 @@ const PHOTOS = [
   'http://o0.github.io/assets/images/tokyo/hotel3.jpg',
 ];
 
+const xMin = 35.65000;
+const xMax = 35.70000;
+const yMin = 139.70000;
+const yMax = 139.80000;
+
 // Функция, возвращающая случайное целое число из переданного диапазона включительно.
 const getRandomIntInclusive = (min, max) => {
   if (min >= max || min < 0 || max < 0) {
     return null;
   }
   return Math.floor(Math.random() * (max - min + 1)) + min;
-}
-getRandomIntInclusive(5, 10);
+};
 
 // Функция, возвращающая случайное число с плавающей точкой из переданного диапазона включительно.
 const getRandomFloatInclusive = (min, max, numbersAfterPoint) => {
@@ -58,8 +62,7 @@ const getRandomFloatInclusive = (min, max, numbersAfterPoint) => {
   }
   const result = Math.random() * (max - min) + min;
   return result.toFixed(numbersAfterPoint);
-}
-getRandomFloatInclusive(5.10, 5.2, 2);
+};
 
 // Функция, возвращающая случайный элемент массива.
 const getRandomArrayElement = (elements) => {
@@ -82,6 +85,34 @@ const getRandomArray = (newArray) => {
   return newArray.slice(randomArrayIndex);
 };
 
+/*
+// Функция, возвращающая массив случайной длины из значений, без перемешивания исходного массива, в.1.
+
+const getRandomArray = (array) => {
+  let newArray = [];
+  array.forEach((element) => {
+    if (getRandomIntInclusive(0, 1)) {
+      return;
+    }
+    newArray.push(element);
+  })
+  return newArray;
+}
+
+// Функция, возвращающая массив случайной длины из значений, без перемешивания исходного массива, в.2.
+
+const getRandomArray = (array) => {
+  const randomArrayIndex = getRandomIntInclusive(0, array.length - 1);
+  return array.slice(randomArrayIndex);
+};
+*/
+
+const getRandomLocation = () => {
+  const x = getRandomFloatInclusive(xMin, xMax, 5);
+  const y = getRandomFloatInclusive(yMin, yMax, 5);
+  return Number(x) + ', ' + Number(y);
+};
+
 const SIMILAR_OFFER_COUNT = 10;
 
 const createOffer = () => {
@@ -91,7 +122,7 @@ const createOffer = () => {
     },
     offer: {
       title: getRandomArrayElement(OFFER_TITLES),
-      address: `${location.x}, ${location.y}`,
+      address: getRandomLocation(),
       price: getRandomIntInclusive(10,2000),
       type: getRandomArrayElement(HOUSING_TYPES),
       rooms: getRandomIntInclusive(1,200),
@@ -103,8 +134,8 @@ const createOffer = () => {
       photos: getRandomArray(PHOTOS),
     },
     location: {
-      x: getRandomFloatInclusive(35.65000, 35.70000, 5),
-      y: getRandomFloatInclusive(139.70000, 139.80000, 5),
+      x: +getRandomFloatInclusive(35.65000, 35.70000, 5),
+      y: +getRandomFloatInclusive(139.70000, 139.80000, 5),
     },
   };
 };
