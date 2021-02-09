@@ -42,10 +42,12 @@ const PHOTOS = [
   'http://o0.github.io/assets/images/tokyo/hotel3.jpg',
 ];
 
-const xMin = 35.65000;
-const xMax = 35.70000;
-const yMin = 139.70000;
-const yMax = 139.80000;
+const MIN_LATITUDE = 35.65000;
+const MAX_LATITUDE = 35.70000;
+const MIN_LONGITUDE = 139.70000;
+const MAX_LONGITUDE = 139.80000;
+const LOCATION_FLOAT = 5;
+const SIMILAR_OFFER_COUNT = 10;
 
 // Функция, возвращающая случайное целое число из переданного диапазона включительно.
 const getRandomIntInclusive = (min, max) => {
@@ -79,13 +81,20 @@ const shuffle = (array) => {
 };
 
 // Функция, возвращающая массив случайной длины из значений массива (значения исходного массива предварительно тасуются).
-const getRandomArray = (newArray) => {
-  const randomArrayIndex = getRandomIntInclusive(0, newArray.length - 1);
-  shuffle(newArray);
-  return newArray.slice(randomArrayIndex);
+const getRandomArray = (array) => {
+  const randomArrayIndex = getRandomIntInclusive(0, array.length - 1);
+  shuffle(array);
+  return array.slice(randomArrayIndex);
 };
 
 /*
+// Функция, возвращающая массив случайной длины из значений массива (значения исходного массива предварительно тасуются), в.2.
+
+const getRandomArray = (array) => {
+  const randomArrayIndex = getRandomIntInclusive(0, array.length - 1);
+  return  array.sort(() => Math.random() > 0.5 ? 1 : -1).slice(randomArrayIndex);
+};
+
 // Функция, возвращающая массив случайной длины из значений, без перемешивания исходного массива, в.1.
 
 const getRandomArray = (array) => {
@@ -108,12 +117,10 @@ const getRandomArray = (array) => {
 */
 
 const getRandomLocation = () => {
-  const x = getRandomFloatInclusive(xMin, xMax, 5);
-  const y = getRandomFloatInclusive(yMin, yMax, 5);
+  const x = getRandomFloatInclusive(MIN_LATITUDE, MAX_LATITUDE, 5);
+  const y = getRandomFloatInclusive(MIN_LONGITUDE, MAX_LONGITUDE, 5);
   return Number(x) + ', ' + Number(y);
 };
-
-const SIMILAR_OFFER_COUNT = 10;
 
 const createOffer = () => {
   return {
@@ -134,8 +141,8 @@ const createOffer = () => {
       photos: getRandomArray(PHOTOS),
     },
     location: {
-      x: +getRandomFloatInclusive(35.65000, 35.70000, 5),
-      y: +getRandomFloatInclusive(139.70000, 139.80000, 5),
+      x: +getRandomFloatInclusive(MIN_LATITUDE, MAX_LATITUDE, LOCATION_FLOAT),
+      y: +getRandomFloatInclusive(MIN_LONGITUDE, MAX_LONGITUDE, LOCATION_FLOAT),
     },
   };
 };
