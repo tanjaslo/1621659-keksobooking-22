@@ -43,9 +43,9 @@ similarAdverts.forEach((author, offer) => {
 map.appendChild(advertFragment);
 
 const renderAdvertisment = (parentElement, advertisement) => {
-  const card = createCardElement(advertisement);
+  const card = similarAdverts(advertisement);
   parentElement.append(card);
 }
-renderCard(map, similarAdverts[0]);
+renderAdvertisment(map, similarAdverts[0]);
 
 export { renderAdvertisment }
