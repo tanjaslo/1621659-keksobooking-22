@@ -1,10 +1,10 @@
-import {createSimilarAdverts} from './data.js';
-import {getHousingType, checkRoomsNumber, checkGuestsNumber} from './util.js';
+import {createSimilarAdverts, getHousingType} from './data.js';
+import {checkRoomsNumber, checkGuestsNumber} from './util.js';
 
 const similarAdverts = createSimilarAdverts();
 
 const renderSimilarAdverts = (similarAdverts) => {
-  const map = document.querySelector('.map-canvas');
+  const map = document.querySelector('#map-canvas');
   const advertTemplate = document.querySelector('#card').content.querySelector('.popup');
   const mapFragment = document.createDocumentFragment();
 
@@ -22,8 +22,7 @@ const renderSimilarAdverts = (similarAdverts) => {
     featureList.innerHTML = '';
     offer.features.forEach(feature => {
       const featureElement = document.createElement('li');
-      const featureClass = `popup__feature popup__feature--${feature}`;
-      feature.classList.add(featureClass);
+      featureElement.classList.add('popup__feature', `popup__feature--${feature}`);
       featureList.appendChild(featureElement);
     });
 

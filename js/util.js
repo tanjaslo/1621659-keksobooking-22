@@ -23,29 +23,19 @@ const getRandomArray = (array) => {
   return array.sort(() => Math.random() > 0.5 ? 1 : -1).slice(randomArrayIndex);
 };
 
-const getHousingType = (type) => {
-  const housing = {
-    palace: 'Дворец',
-    flat: 'Квартира',
-    bungalow: 'Бунгало',
-    house: 'Дом',
-  }
-  return housing[type];
-};
-
 const checkRoomsNumber = (rooms) => {
   const val = rooms.length % 10;
   const val2 = rooms.length % 100;
   if ([11, 12, 13, 14].includes(val2)) {
-    return 'комнат';
+    return rooms + ' комнат';
   }
   if (val === 1) {
-    return 'комната';
+    return rooms + ' комната';
   }
   if ([2,3,4].includes(val)) {
-    return 'комнаты';
+    return rooms + ' комнаты';
   }
-  return 'комнат';
+  return rooms + ' комнат';
 };
 
 const checkGuestsNumber = (guests) => {
@@ -57,7 +47,6 @@ export {
   getRandomFloatInclusive,
   getRandomArrayElement,
   getRandomArray,
-  getHousingType,
   checkRoomsNumber,
   checkGuestsNumber
 };

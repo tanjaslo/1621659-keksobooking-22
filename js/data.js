@@ -26,6 +26,17 @@ const HOUSING_TYPES = [
   'bungalow',
 ];
 
+const HOUSING = {
+  palace: 'Дворец',
+  flat: 'Квартира',
+  bungalow: 'Бунгало',
+  house: 'Дом',
+};
+
+const getHousingType = (type) => {
+  return HOUSING[type];
+};
+
 const CHECK_TIME = [
   '12:00',
   '13:00',
@@ -91,4 +102,4 @@ const createAdvert = () => {
 };
 const createSimilarAdverts = () => new Array(SIMILAR_ADVERT_COUNT).fill(null).map(createAdvert);
 
-export {createSimilarAdverts};
+export { createSimilarAdverts, getHousingType };
