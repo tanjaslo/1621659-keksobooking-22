@@ -23,9 +23,30 @@ const getRandomArray = (array) => {
   return array.sort(() => Math.random() > 0.5 ? 1 : -1).slice(randomArrayIndex);
 };
 
+const checkRoomsNumber = (rooms) => {
+  const val = rooms.length % 10;
+  const val2 = rooms.length % 100;
+  if ([11, 12, 13, 14].includes(val2)) {
+    return rooms + ' комнат';
+  }
+  if (val === 1) {
+    return rooms + ' комната';
+  }
+  if ([2,3,4].includes(val)) {
+    return rooms + ' комнаты';
+  }
+  return rooms + ' комнат';
+};
+
+const checkGuestsNumber = (guests) => {
+  return guests === 1 || guests > 20 && guests % 10 === 1 && guests % 100 !== 11 ? guests + ' гостя' : guests + ' гостей';
+};
+
 export {
   getRandomIntInclusive,
   getRandomFloatInclusive,
   getRandomArrayElement,
-  getRandomArray
+  getRandomArray,
+  checkRoomsNumber,
+  checkGuestsNumber
 };
