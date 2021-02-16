@@ -24,24 +24,28 @@ const getRandomArray = (array) => {
 };
 
 const getHousingType = (type) => {
-  switch (type) {
-    case 'palace':
-      return 'Дворец';
-    case 'flat':
-      return 'Квартира';
-    case 'house':
-      return 'Дом';
-    case 'bungalow':
-      return 'Бунгало';
+  const housing = {
+    palace: 'Дворец',
+    flat: 'Квартира',
+    bungalow: 'Бунгало',
+    house: 'Дом',
   }
+  return housing[type];
 };
 
 const checkRoomsNumber = (rooms) => {
-  if (rooms === 1 || rooms > 20 && rooms % 10 === 1 && rooms % 100 !== 11)
-  { return rooms + ' комната'; }
-  if (rooms >= 2 && rooms <= 4 || rooms % 10 >= 2 && rooms % 10 <=4 && rooms % 100 > 20)
-  { return rooms + ' комнаты'; }
-  else { return rooms + ' комнат'; }
+  const val = rooms.length % 10;
+  const val2 = rooms.length % 100;
+  if ([11, 12, 13, 14].includes(val2)) {
+    return 'комнат';
+  }
+  if (val === 1) {
+    return 'комната';
+  }
+  if ([2,3,4].includes(val)) {
+    return 'комнаты';
+  }
+  return 'комнат';
 };
 
 const checkGuestsNumber = (guests) => {
