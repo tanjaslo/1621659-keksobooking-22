@@ -59,12 +59,12 @@ const MIN_LATITUDE = 35.65000;
 const MAX_LATITUDE = 35.70000;
 const MIN_LONGITUDE = 139.70000;
 const MAX_LONGITUDE = 139.80000;
-const locationX = getRandomFloatInclusive(MIN_LATITUDE, MAX_LATITUDE, LOCATION_FLOAT);
-const locationY = getRandomFloatInclusive(MIN_LONGITUDE, MAX_LONGITUDE, LOCATION_FLOAT);
 const LOCATION_FLOAT = 5;
 const SIMILAR_ADVERT_COUNT = 10;
 
 const createAdvert = () => {
+  const locationX = getRandomFloatInclusive(MIN_LATITUDE, MAX_LATITUDE, LOCATION_FLOAT);
+  const locationY = getRandomFloatInclusive(MIN_LONGITUDE, MAX_LONGITUDE, LOCATION_FLOAT);
   const advert = {
     author: {
       avatar: `img/avatars/user0${getRandomIntInclusive(MIN_AVATAR_NUMBER, MAX_AVATAR_NUMBER)}.png`,
@@ -89,6 +89,6 @@ const createAdvert = () => {
   };
   return advert;
 };
-const createSimilarAdverts = new Array(SIMILAR_ADVERT_COUNT).fill(null).map(() => createAdvert());
+const createSimilarAdverts = () => new Array(SIMILAR_ADVERT_COUNT).fill(null).map(() => createAdvert());
 
 export {createSimilarAdverts};

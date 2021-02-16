@@ -1,5 +1,5 @@
 import {createSimilarAdverts} from './data.js';
-import {getHousingType, checkRoomsNumber, checkGuestsNumber} from './utils.js';
+import {getHousingType, checkRoomsNumber, checkGuestsNumber} from './util.js';
 
 const map = document.querySelector('#map-canvas');
 const advertTemplate = document.querySelector('#card').content.querySelector('.popup');
