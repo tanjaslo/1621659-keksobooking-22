@@ -26,13 +26,6 @@ const HOUSING_TYPES = [
   'palace',
 ];
 
-const HOUSING_PRICE = {
-  bungalow: 0,
-  flat: 1000,
-  house: 5000,
-  palace: 10000,
-};
-
 const HOUSING = {
   bungalow: 'Бунгало',
   flat: 'Квартира',
