@@ -15,27 +15,13 @@ const checkInList = document.querySelector('#timein');
 const checkOutList = document.querySelector('#timeout');
 
 typeList.addEventListener('change', () => {
-  for (let i = 0; i < typeList.options.length; i++) {
-    if (typeList.options[i].selected) {
-      price.placeholder = getHousingPrice(typeList.options[i].value);
-    }
-  }
+  price.placeholder = getHousingPrice(typeList.value);
 });
 
-checkInList.addEventListener('change', function () {
-  for (let i = 0; i < checkInList.options.length; i++) {
-    if (checkInList.options[i].selected) {
-      checkOutList.options[i].setAttribute('selected', true);
-      checkOutList.options[i].value = checkInList.options[i].value;
-    }
-  }
+checkInList.addEventListener('change', () => {
+  checkOutList.value = checkInList.value;
 });
 
-checkOutList.addEventListener('change', function () {
-  for (let i = 0; i < checkOutList.options.length; i++) {
-    if (checkOutList.options[i].selected) {
-      checkInList.options[i].setAttribute('selected', true);
-      checkInList.options[i].value = checkOutList.options[i].value;
-    }
-  }
+checkOutList.addEventListener('change', () => {
+  checkInList.selectedIndex = checkOutList.selectedIndex;
 });
