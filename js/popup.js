@@ -4,7 +4,6 @@ import {checkRoomsNumber, checkGuestsNumber} from './util.js';
 const similarAdverts = createSimilarAdverts();
 
 const renderSimilarAdverts = (similarAdverts) => {
-  const map = document.querySelector('#map-canvas');
   const advertTemplate = document.querySelector('#card').content.querySelector('.popup');
   const mapFragment = document.createDocumentFragment();
 
@@ -40,7 +39,6 @@ const renderSimilarAdverts = (similarAdverts) => {
 
     mapFragment.appendChild(advertElement);
   });
-  map.appendChild(mapFragment);
 };
 
 renderSimilarAdverts(similarAdverts);
