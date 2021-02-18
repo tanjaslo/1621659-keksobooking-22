@@ -20,17 +20,17 @@ const ADVERT_DESCRIPTIONS = [
 ];
 
 const HOUSING_TYPES = [
-  'palace',
+  'bungalow',
   'flat',
   'house',
-  'bungalow',
+  'palace',
 ];
 
 const HOUSING = {
-  palace: 'Дворец',
-  flat: 'Квартира',
   bungalow: 'Бунгало',
+  flat: 'Квартира',
   house: 'Дом',
+  palace: 'Дворец',
 };
 
 const getHousingType = (type) => {
