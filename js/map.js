@@ -4,7 +4,6 @@ import { deactivateAdForm, activateAdForm } from './form.js';
 deactivateAdForm();
 
 const map = L.map('map-canvas').on('load', () => {
-  console.log('Карта инициализирована')
   activateAdForm();
 })
   .setView({
@@ -18,3 +17,21 @@ L.tileLayer(
     attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
   },
 ).addTo(map);
+
+const mainPinIcon = L.icon({
+  iconUrl: 'https://assets.htmlacademy.ru/content/intensive/javascript-1/demo/interactive-map/main-pin.svg',
+  iconSize: [52, 52],
+  iconAnchor: [26, 52],
+});
+
+const mainPinMarker = L.marker(
+  {
+    lat: 35.68950,
+    lng: 139.69171,
+  },
+  {
+    draggable: true,
+    icon: mainPinIcon,
+  },
+);
+mainPinMarker.addTo(map);
