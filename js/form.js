@@ -1,6 +1,7 @@
 const adForm = document.querySelector('.ad-form');
 const mapFilters = document.querySelector('.map__filters');
 const mapFeatures = document.querySelector('.map__features');
+const address = document.querySelector('#address');
 const typeList = document.querySelector('#type');
 const price = document.querySelector('#price');
 const checkInList = document.querySelector('#timein');
@@ -9,13 +10,13 @@ const checkOutList = document.querySelector('#timeout');
 const deactivateAdForm = () => {
   adForm.classList.add('ad-form--disabled');
   adForm.querySelectorAll('.ad-form fieldset').forEach((fieldset) => {
-    fieldset.setAttribute('disabled', '');
+    fieldset.setAttribute('disabled', 'disabled');
   })
   mapFilters.classList.add('map__filters--disabled');
   mapFilters.querySelectorAll('.map__filter').forEach((filter) => {
     filter.setAttribute('disabled', '');
   })
-  mapFeatures.setAttribute('disabled', '');
+  mapFeatures.setAttribute('disabled', 'disabled');
 };
 
 const activateAdForm = () => {
@@ -23,6 +24,7 @@ const activateAdForm = () => {
   adForm.querySelectorAll('.ad-form fieldset').forEach((fieldset) => {
     fieldset.removeAttribute('disabled');
   })
+  address.setAttribute('readonly', 'readonly');
   mapFilters.classList.remove('map__filters--disabled');
   mapFilters.querySelectorAll('.map__filter').forEach((filter) => {
     filter.removeAttribute('disabled');
@@ -53,4 +55,4 @@ checkOutList.addEventListener('change', () => {
   checkInList.selectedIndex = checkOutList.selectedIndex;
 });
 
-export { deactivateAdForm, activateAdForm }
+export { address, deactivateAdForm, activateAdForm }

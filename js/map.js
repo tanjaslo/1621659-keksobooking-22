@@ -1,15 +1,18 @@
 /* global L:readonly */
-import { deactivateAdForm, activateAdForm } from './form.js';
+import { address, deactivateAdForm, activateAdForm } from './form.js';
+import { similarAdverts, MAIN_LATITUDE, MAIN_LONGITUDE, LOCATION_FLOAT } from './data.js';
+import { createAdvertElement } from './popup.js';
 
 deactivateAdForm();
 
 const map = L.map('map-canvas').on('load', () => {
   activateAdForm();
+  address.value = `${MAIN_LATITUDE}, ${MAIN_LONGITUDE}`;
 })
   .setView({
-    lat: 35.68950,
-    lng: 139.69171,
-  }, 10);
+    lat: MAIN_LATITUDE,
+    lng: MAIN_LONGITUDE,
+  }, 11);
 
 L.tileLayer(
   'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
@@ -19,15 +22,15 @@ L.tileLayer(
 ).addTo(map);
 
 const mainPinIcon = L.icon({
-  iconUrl: 'https://assets.htmlacademy.ru/content/intensive/javascript-1/demo/interactive-map/main-pin.svg',
+  iconUrl: 'img/main-pin.svg',
   iconSize: [52, 52],
   iconAnchor: [26, 52],
 });
 
 const mainPinMarker = L.marker(
   {
-    lat: 35.68950,
-    lng: 139.69171,
+    lat: MAIN_LATITUDE,
+    lng: MAIN_LONGITUDE,
   },
   {
     draggable: true,
@@ -35,3 +38,31 @@ const mainPinMarker = L.marker(
   },
 );
 mainPinMarker.addTo(map);
+
+mainPinMarker.on('moveend', (evt) => {
+  const lat = evt.target.getLatLng().lat;
+  const lng = evt.target.getLatLng().lng;
+  address.value = `${lat.toFixed(LOCATION_FLOAT)}, ${lng.toFixed(LOCATION_FLOAT)}`;
+});
+
+similarAdverts.forEach(({author, location, offer}) => {
+  const advertPinIcon = L.icon({
+    iconUrl: 'img/pin.svg',
+    iconSize: [40, 40],
+    iconAnchor: [20, 40],
+  });
+
+  const lat = location.x;
+  const lng = location.y;
+
+  const advertMarker = L.marker({
+    lat,
+    lng,
+  },
+  {
+    advertPinIcon,
+  },
+  );
+
+  advertMarker.addTo(map).bindPopup(createAdvertElement({author, offer}));
+});
