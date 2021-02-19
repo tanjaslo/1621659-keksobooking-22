@@ -13,10 +13,10 @@ const ADVERT_TITLES = [
 ];
 
 const ADVERT_DESCRIPTIONS = [
-  'Clean and cosy private room in the center of Tokyo. Accommodation has a dining area, a flat-screen TV and a private bathroom with shower and a hairdryer.',
-  'This accommodation is situated on Gyotoku Riverbank in 300 metres from all local attractions. The apartment offers a children\'s playground. Fishing and hiking can be enjoyed nearby.',
-  'In the heart of Tokyo, set within a short distance of Ruins of Takanawa Okido Gate and Shinsei Temple, this property is a renovated Japanese townhouse fitted with air conditioning and free WiFi. Guests can also relax in the shared lounge area. Free private parking is available.',
-  'Suitable location in an area where guests can engage in activities such as hiking and cycling. This air-conditioned property is composed of 2 separate bedrooms, a living room, a fully equipped kitchen with a microwave and fridge, and 1 bathroom.',
+  'Clean and cosy private room in the center of Tokyo.',
+  'This accommodation is situated on Gyotoku Riverbank in 300 metres from all local attractions.',
+  'This property is a renovated Japanese townhouse in the heart of Tokyo',
+  'Suitable location in an area where guests can engage in activities such as hiking and cycling.',
 ];
 
 const HOUSING_TYPES = [

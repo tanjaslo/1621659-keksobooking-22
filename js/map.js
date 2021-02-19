@@ -12,7 +12,7 @@ const map = L.map('map-canvas').on('load', () => {
   .setView({
     lat: MAIN_LATITUDE,
     lng: MAIN_LONGITUDE,
-  }, 11);
+  }, 12);
 
 L.tileLayer(
   'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
