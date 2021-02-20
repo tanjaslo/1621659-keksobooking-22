@@ -8,5 +8,3 @@ const similarAdverts = createSimilarAdverts();
 deactivateAdForm();
 initListeners();
 initMap(similarAdverts);
-
-export { similarAdverts }
