@@ -4,7 +4,7 @@ import { MAIN_LATITUDE, MAIN_LONGITUDE, LOCATION_FLOAT } from './data.js';
 import { createAdvertElement } from './popup.js';
 import { similarAdverts } from './main.js';
 
-const initMap = () => {
+const initMap = (similarAdverts) => {
   const map = L.map('map-canvas').on('load', () => {
     activateAdForm();
     address.value = `${MAIN_LATITUDE}, ${MAIN_LONGITUDE}`;
