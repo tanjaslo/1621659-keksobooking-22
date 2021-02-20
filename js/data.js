@@ -75,7 +75,7 @@ const MAIN_LONGITUDE = 139.69171;
 const LOCATION_FLOAT = 5;
 const SIMILAR_ADVERT_COUNT = 10;
 
-const createAdvert = (({author, offer}) => {
+const createAdvert = () => {
   const locationX = getRandomFloatInclusive(MIN_LATITUDE, MAX_LATITUDE, LOCATION_FLOAT);
   const locationY = getRandomFloatInclusive(MIN_LONGITUDE, MAX_LONGITUDE, LOCATION_FLOAT);
   const advert = {
@@ -102,6 +102,7 @@ const createAdvert = (({author, offer}) => {
   };
   return advert;
 };
+
 const createSimilarAdverts = () => new Array(SIMILAR_ADVERT_COUNT).fill(null).map(createAdvert);
 
 export { MAIN_LATITUDE, MAIN_LONGITUDE, LOCATION_FLOAT, getHousingType, createSimilarAdverts }
