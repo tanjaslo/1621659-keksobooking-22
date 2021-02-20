@@ -2,7 +2,6 @@
 import { address, activateAdForm } from './form.js';
 import { MAIN_LATITUDE, MAIN_LONGITUDE, LOCATION_FLOAT } from './data.js';
 import { createAdvertElement } from './popup.js';
-import { similarAdverts } from './main.js';
 
 const initMap = (similarAdverts) => {
   const map = L.map('map-canvas').on('load', () => {
