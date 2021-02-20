@@ -7,6 +7,13 @@ const price = document.querySelector('#price');
 const checkInList = document.querySelector('#timein');
 const checkOutList = document.querySelector('#timeout');
 
+const HOUSING_PRICE = {
+  bungalow: 0,
+  flat: 1000,
+  house: 5000,
+  palace: 10000,
+};
+
 const deactivateAdForm = () => {
   adForm.classList.add('ad-form--disabled');
   adForm.querySelectorAll('.ad-form fieldset').forEach((fieldset) => {
@@ -32,27 +39,22 @@ const activateAdForm = () => {
   mapFeatures.removeAttribute('disabled');
 };
 
-const HOUSING_PRICE = {
-  bungalow: 0,
-  flat: 1000,
-  house: 5000,
-  palace: 10000,
-};
-
 const getHousingPrice = (type) => {
   return HOUSING_PRICE[type];
 };
 
-typeList.addEventListener('change', () => {
-  price.placeholder = getHousingPrice(typeList.value);
-});
+const initListeners = () => {
+  typeList.addEventListener('change', () => {
+    price.placeholder = getHousingPrice(typeList.value);
+  });
 
-checkInList.addEventListener('change', () => {
-  checkOutList.value = checkInList.value;
-});
+  checkInList.addEventListener('change', () => {
+    checkOutList.value = checkInList.value;
+  });
 
-checkOutList.addEventListener('change', () => {
-  checkInList.selectedIndex = checkOutList.selectedIndex;
-});
+  checkOutList.addEventListener('change', () => {
+    checkInList.selectedIndex = checkOutList.selectedIndex;
+  });
+};
 
-export { address, deactivateAdForm, activateAdForm }
+export { address, deactivateAdForm, activateAdForm, initListeners }
