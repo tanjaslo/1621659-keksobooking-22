@@ -6,6 +6,13 @@ const typeList = document.querySelector('#type');
 const price = document.querySelector('#price');
 const checkInList = document.querySelector('#timein');
 const checkOutList = document.querySelector('#timeout');
+const advertTitle = document.querySelector('#title');
+const roomNumber = document.querySelector('#room_number');
+const roomCapacity = document.querySelector('#capacity');
+const optionCapacity = roomCapacity.querySelectorAll('option');
+
+const MIN_TITLE_LENGTH = 30;
+const MAX_TITLE_LENGTH = 100;
 
 const HOUSING_PRICE = {
   bungalow: 0,
@@ -46,6 +53,7 @@ const getHousingPrice = (type) => {
 const initListeners = () => {
   typeList.addEventListener('change', () => {
     price.placeholder = getHousingPrice(typeList.value);
+    price.min = getHousingPrice(typeList.value);
   });
 
   checkInList.addEventListener('change', () => {
@@ -54,6 +62,51 @@ const initListeners = () => {
 
   checkOutList.addEventListener('change', () => {
     checkInList.selectedIndex = checkOutList.selectedIndex;
+  });
+
+  advertTitle.addEventListener('input', () => {
+    const valueLength = advertTitle.value.length;
+    if (valueLength < MIN_TITLE_LENGTH) {
+      advertTitle.setCustomValidity('Ещё ' + (MIN_TITLE_LENGTH - valueLength) +' симв.');
+    } else if (valueLength > MAX_TITLE_LENGTH) {
+      advertTitle.setCustomValidity('Удалите лишние ' + (valueLength - MAX_TITLE_LENGTH) +' симв.');
+    } else {
+      advertTitle.setCustomValidity('');
+    }
+    advertTitle.reportValidity();
+  });
+
+  price.addEventListener('invalid', () => {
+    if (price.validity.valueMissing) {
+      price.setCustomValidity('Это поле обязательно для заполнения');
+    } else if (price.value < price.min) {
+      price.setCustomValidity(`Стоимость должна быть не менее ${price.min}`);
+    } else {
+      price.setCustomValidity('');
+    }
+    price.reportValidity();
+  });
+
+  roomNumber.addEventListener('change', () => {
+
+    if (Number(roomNumber.value) === 100) {
+      roomCapacity.selectedIndex = 0;
+      optionCapacity.forEach((option) => {
+        if (option.value > 0) {
+          option.disabled = true;
+        }
+      });
+    } else {
+      roomCapacity.selectedIndex = roomNumber.value;
+      optionCapacity.forEach((option, index) => {
+        if (option.value > roomNumber.value) {
+          option.disabled = true;
+        } else if (index === 0) {
+          option.disabled = true;
+        }
+        else {option.disabled = false;}
+      });
+    }
   });
 };
 
