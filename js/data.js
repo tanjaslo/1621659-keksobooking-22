@@ -63,7 +63,7 @@ const MAX_AVATAR_NUMBER = 8;
 const MIN_PRICE = 10;
 const MAX_PRICE = 1000000;
 const MIN_ROOMS_NUMBER = 1;
-const MAX_ROOMS_NUMBER = 10;
+const MAX_ROOMS_NUMBER = 100;
 const MIN_GUESTS_NUMBER = 1;
 const MAX_GUESTS_NUMBER = 30;
 const MIN_LATITUDE = 35.65000;
@@ -105,4 +105,4 @@ const createAdvert = () => {
 
 const createSimilarAdverts = () => new Array(SIMILAR_ADVERT_COUNT).fill(null).map(createAdvert);
 
-export { MAIN_LATITUDE, MAIN_LONGITUDE, LOCATION_FLOAT, MIN_PRICE, MAX_PRICE, getHousingType, createSimilarAdverts }
+export { MAIN_LATITUDE, MAIN_LONGITUDE, LOCATION_FLOAT, MAX_ROOMS_NUMBER, getHousingType, createSimilarAdverts }

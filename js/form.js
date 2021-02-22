@@ -1,3 +1,5 @@
+import { MAX_ROOMS_NUMBER } from './data.js';
+
 const adForm = document.querySelector('.ad-form');
 const mapFilters = document.querySelector('.map__filters');
 const mapFeatures = document.querySelector('.map__features');
@@ -67,9 +69,9 @@ const initListeners = () => {
   advertTitle.addEventListener('input', () => {
     const valueLength = advertTitle.value.length;
     if (valueLength < MIN_TITLE_LENGTH) {
-      advertTitle.setCustomValidity('Ещё ' + (MIN_TITLE_LENGTH - valueLength) +' симв.');
+      advertTitle.setCustomValidity(`Ещё ${(MIN_TITLE_LENGTH - valueLength)} симв.`);
     } else if (valueLength > MAX_TITLE_LENGTH) {
-      advertTitle.setCustomValidity('Удалите лишние ' + (valueLength - MAX_TITLE_LENGTH) +' симв.');
+      advertTitle.setCustomValidity(`Удалите лишние ${(valueLength - MAX_TITLE_LENGTH)} симв.`);
     } else {
       advertTitle.setCustomValidity('');
     }
@@ -89,22 +91,15 @@ const initListeners = () => {
 
   roomNumber.addEventListener('change', () => {
 
-    if (Number(roomNumber.value) === 100) {
+    if (Number(roomNumber.value) === MAX_ROOMS_NUMBER) {
       roomCapacity.selectedIndex = 0;
       optionCapacity.forEach((option) => {
-        if (option.value > 0) {
-          option.disabled = true;
-        }
+        option.disabled = option.value > roomCapacity.selectedIndex;
       });
     } else {
       roomCapacity.selectedIndex = roomNumber.value;
       optionCapacity.forEach((option, index) => {
-        if (option.value > roomNumber.value) {
-          option.disabled = true;
-        } else if (index === 0) {
-          option.disabled = true;
-        }
-        else {option.disabled = false;}
+        option.disabled = index === 0 || option.value > roomNumber.value;
       });
     }
   });
