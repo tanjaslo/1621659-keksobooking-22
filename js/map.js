@@ -1,7 +1,13 @@
 /* global L:readonly */
 import { address, activateAdForm } from './form.js';
-import { MAIN_LATITUDE, MAIN_LONGITUDE, LOCATION_FLOAT } from './data.js';
 import { createAdvertElement } from './popup.js';
+
+const MAIN_LATITUDE = 35.68950;
+const MAIN_LONGITUDE = 139.69171;
+const LOCATION_FLOAT = 5;
+const MAIN_ZOOM = 12;
+const MAIN_PIN_WIDTH = 52;
+const PIN_WIDTH = 40;
 
 const initMap = (similarAdverts) => {
   const map = L.map('map-canvas').on('load', () => {
@@ -11,7 +17,7 @@ const initMap = (similarAdverts) => {
     .setView({
       lat: MAIN_LATITUDE,
       lng: MAIN_LONGITUDE,
-    }, 12);
+    }, MAIN_ZOOM);
 
   L.tileLayer(
     'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
@@ -22,8 +28,8 @@ const initMap = (similarAdverts) => {
 
   const mainPinIcon = L.icon({
     iconUrl: 'img/main-pin.svg',
-    iconSize: [52, 52],
-    iconAnchor: [26, 52],
+    iconSize: [MAIN_PIN_WIDTH, MAIN_PIN_WIDTH],
+    iconAnchor: [MAIN_PIN_WIDTH/2, MAIN_PIN_WIDTH],
   });
 
   const mainPinMarker = L.marker(
@@ -47,8 +53,8 @@ const initMap = (similarAdverts) => {
   similarAdverts.forEach(({author, location, offer}) => {
     const advertPinIcon = L.icon({
       iconUrl: 'img/pin.svg',
-      iconSize: [40, 40],
-      iconAnchor: [20, 40],
+      iconSize: [PIN_WIDTH, PIN_WIDTH],
+      iconAnchor: [PIN_WIDTH/2, PIN_WIDTH],
     });
 
     const lat = location.x;

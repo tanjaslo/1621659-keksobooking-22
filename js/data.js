@@ -70,8 +70,6 @@ const MIN_LATITUDE = 35.65000;
 const MAX_LATITUDE = 35.70000;
 const MIN_LONGITUDE = 139.70000;
 const MAX_LONGITUDE = 139.80000;
-const MAIN_LATITUDE = 35.68950;
-const MAIN_LONGITUDE = 139.69171;
 const LOCATION_FLOAT = 5;
 const SIMILAR_ADVERT_COUNT = 10;
 
@@ -105,4 +103,4 @@ const createAdvert = () => {
 
 const createSimilarAdverts = () => new Array(SIMILAR_ADVERT_COUNT).fill(null).map(createAdvert);
 
-export { MAIN_LATITUDE, MAIN_LONGITUDE, LOCATION_FLOAT, MAX_ROOMS_NUMBER, getHousingType, createSimilarAdverts }
+export { LOCATION_FLOAT, MAX_ROOMS_NUMBER, getHousingType, createSimilarAdverts }
