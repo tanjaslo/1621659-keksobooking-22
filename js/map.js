@@ -69,8 +69,13 @@ const initMap = (similarAdverts) => {
     },
     );
 
-    advertMarker.addTo(map).bindPopup(createAdvertElement({author, offer}));
-  });
-};
+    advertMarker
+      .addTo(map)
+      .bindPopup(createAdvertElement({author, offer}),
+        {
+          keepInView: true,
+        },
+  );
+});
 
 export { initMap }
