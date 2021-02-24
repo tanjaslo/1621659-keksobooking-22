@@ -74,8 +74,8 @@ const initMap = (similarAdverts) => {
       .bindPopup(createAdvertElement({author, offer}),
         {
           keepInView: true,
-        },
-  );
-});
+        });
+  });
+}
 
 export { initMap }
