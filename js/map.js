@@ -5,7 +5,7 @@ import { createAdvertElement } from './popup.js';
 const MAIN_LATITUDE = 35.68950;
 const MAIN_LONGITUDE = 139.69171;
 const LOCATION_FLOAT = 5;
-const MAIN_ZOOM = 12;
+const MAIN_ZOOM = 9;
 const MAIN_PIN_WIDTH = 52;
 const PIN_WIDTH = 40;
 
@@ -57,8 +57,8 @@ const initMap = (similarAdverts) => {
       iconAnchor: [PIN_WIDTH/2, PIN_WIDTH],
     });
 
-    const lat = location.x;
-    const lng = location.y;
+    const lat = location.lat;
+    const lng = location.lng;
 
     const advertMarker = L.marker({
       lat,

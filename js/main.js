@@ -1,10 +1,12 @@
 import './popup.js';
 import { deactivateAdForm, initListeners } from './form.js';
-import { createSimilarAdverts } from './data.js';
 import { initMap } from './map.js';
-
-const similarAdverts = createSimilarAdverts();
 
 deactivateAdForm();
 initListeners();
-initMap(similarAdverts);
+
+fetch('https://22.javascript.pages.academy/keksobooking/data')
+  .then((response) => response.json())
+  .then((adverts) => {
+    initMap(adverts);
+});
