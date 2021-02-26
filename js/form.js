@@ -1,4 +1,6 @@
-import { MAX_ROOMS_NUMBER } from './data.js';
+import {MAX_ROOMS_NUMBER} from './data.js';
+import {showAlert} from './util.js';
+import {sendData} from './api.js';
 
 const adForm = document.querySelector('.ad-form');
 const mapFilters = document.querySelector('.map__filters');
@@ -90,7 +92,6 @@ const initListeners = () => {
   });
 
   roomNumber.addEventListener('change', () => {
-
     if (Number(roomNumber.value) === MAX_ROOMS_NUMBER) {
       roomCapacity.selectedIndex = 0;
       optionCapacity.forEach((option) => {
@@ -105,4 +106,16 @@ const initListeners = () => {
   });
 };
 
-export { address, deactivateAdForm, activateAdForm, initListeners }
+const setAdFormSubmit = (onSuccess) => {
+  adForm.addEventListener('submit', (evt) => {
+    evt.preventDefault();
+
+    sendData(
+      () => onSuccess(),
+      () => showAlert('Не удалось отправить форму. Попробуйте ещё раз'),
+      new FormData(evt.target),
+    );
+  });
+};
+
+export { address, deactivateAdForm, activateAdForm, initListeners, setAdFormSubmit }

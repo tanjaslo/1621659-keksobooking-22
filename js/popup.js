@@ -39,7 +39,7 @@ const createAdvertElement = ({author, offer}) => {
   return advertElement;
 };
 
-const renderSimilarAdverts = (container, advert) => {
+const renderSimilarAdverts = (advert) => {
   const advertCard = createAdvertElement(advert);
   const mapFragment = document.createDocumentFragment();
   mapFragment.appendChild(advertCard);
