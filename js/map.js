@@ -53,9 +53,9 @@ const initMap = (similarAdverts) => {
           keepInView: true,
         });
   });
-  };
+};
 
-  const initMainMarker = () => {
+const initMainMarker = () => {
   const mainPinIcon = L.icon({
     iconUrl: 'img/main-pin.svg',
     iconSize: [MAIN_PIN_WIDTH, MAIN_PIN_WIDTH],
