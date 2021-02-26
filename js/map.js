@@ -8,9 +8,10 @@ const LOCATION_FLOAT = 5;
 const MAIN_ZOOM = 9;
 const MAIN_PIN_WIDTH = 52;
 const PIN_WIDTH = 40;
+const map = L.map('map-canvas');
 
 const initMap = (similarAdverts) => {
-  const map = L.map('map-canvas').on('load', () => {
+  map.on('load', () => {
     activateAdForm();
     address.value = `${MAIN_LATITUDE}, ${MAIN_LONGITUDE}`;
   })
@@ -25,31 +26,6 @@ const initMap = (similarAdverts) => {
       attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
     },
   ).addTo(map);
-
-  const mainPinIcon = L.icon({
-    iconUrl: 'img/main-pin.svg',
-    iconSize: [MAIN_PIN_WIDTH, MAIN_PIN_WIDTH],
-    iconAnchor: [MAIN_PIN_WIDTH/2, MAIN_PIN_WIDTH],
-  });
-
-  const mainPinMarker = L.marker(
-    {
-      lat: MAIN_LATITUDE,
-      lng: MAIN_LONGITUDE,
-    },
-    {
-      draggable: true,
-      icon: mainPinIcon,
-    },
-  );
-
-  mainPinMarker.addTo(map);
-
-  mainPinMarker.on('moveend', (evt) => {
-    const lat = evt.target.getLatLng().lat;
-    const lng = evt.target.getLatLng().lng;
-    address.value = `${lat.toFixed(LOCATION_FLOAT)}, ${lng.toFixed(LOCATION_FLOAT)}`;
-  });
 
   similarAdverts.forEach(({author, location, offer}) => {
     const advertPinIcon = L.icon({
@@ -77,9 +53,43 @@ const initMap = (similarAdverts) => {
           keepInView: true,
         });
   });
+  };
+
+  const initMainMarker = () => {
+  const mainPinIcon = L.icon({
+    iconUrl: 'img/main-pin.svg',
+    iconSize: [MAIN_PIN_WIDTH, MAIN_PIN_WIDTH],
+    iconAnchor: [MAIN_PIN_WIDTH/2, MAIN_PIN_WIDTH],
+  });
+
+  const mainPinMarker = L.marker(
+    {
+      lat: MAIN_LATITUDE,
+      lng: MAIN_LONGITUDE,
+    },
+    {
+      draggable: true,
+      icon: mainPinIcon,
+    },
+  );
+  mainPinMarker.on('moveend', (evt) => {
+    const lat = evt.target.getLatLng().lat;
+    const lng = evt.target.getLatLng().lng;
+    address.value = `${lat.toFixed(LOCATION_FLOAT)}, ${lng.toFixed(LOCATION_FLOAT)}`;
+  });
   return mainPinMarker;
 };
 
-// const marker = initMap();
+const mainMarker = initMainMarker();
+mainMarker.addTo(map);
 
-export { initMap } //marker }
+const resetMainMarker = () => {
+  mainMarker.setLatLng(new window.L.LatLng(MAIN_LATITUDE, MAIN_LONGITUDE));
+  map.setView(new window.L.LatLng(MAIN_LATITUDE, MAIN_LONGITUDE), MAIN_ZOOM);
+};
+
+const setAddress = () => {
+  address.value = `${MAIN_LATITUDE}, ${MAIN_LONGITUDE}`;
+};
+
+export { initMap, setAddress, mainMarker, resetMainMarker }

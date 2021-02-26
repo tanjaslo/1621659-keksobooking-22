@@ -1,7 +1,7 @@
 import { MAX_ROOMS_NUMBER } from './data.js';
 import { sendData } from './api.js';
 import { showSuccessMessage, showErrorMessage } from './message.js';
-// import { marker } from './map.js';
+import { setAddress, resetMainMarker } from './map.js';
 
 const adForm = document.querySelector('.ad-form');
 const mapFilters = document.querySelector('.map__filters');
@@ -112,7 +112,12 @@ const setAdFormSubmit = () => {
     evt.preventDefault();
 
     sendData(
-      () => showSuccessMessage(),
+      () => {
+        showSuccessMessage();
+        adForm.reset();
+        resetMainMarker();
+        setAddress(); // здесь работает
+      },
       () => showErrorMessage(),
       new FormData(evt.target),
     );
@@ -123,7 +128,8 @@ const setAdFormReset = () => {
   const buttonReset = adForm.querySelector('.ad-form__reset');
   buttonReset.addEventListener('click', () => {
     adForm.reset();
-    // marker.setLatLng(MAIN_LATITUDE, MAIN_LONGITUDE);
+    resetMainMarker();
+    setAddress(); // а здесь не работает! поле остается пустым
   })
 };
 
