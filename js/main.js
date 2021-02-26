@@ -1,5 +1,5 @@
 import './popup.js';
-import { deactivateAdForm, initListeners, setAdFormSubmit } from './form.js';
+import { deactivateAdForm, initListeners, setAdFormSubmit, setAdFormReset } from './form.js';
 import { getData } from './api.js';
 import { initMap } from './map.js';
 
@@ -11,3 +11,4 @@ getData((adverts) => {
 });
 
 setAdFormSubmit();
+setAdFormReset();

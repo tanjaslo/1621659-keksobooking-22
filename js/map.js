@@ -42,6 +42,7 @@ const initMap = (similarAdverts) => {
       icon: mainPinIcon,
     },
   );
+
   mainPinMarker.addTo(map);
 
   mainPinMarker.on('moveend', (evt) => {
@@ -76,6 +77,9 @@ const initMap = (similarAdverts) => {
           keepInView: true,
         });
   });
-}
+  return mainPinMarker;
+};
 
-export { initMap }
+// const marker = initMap();
+
+export { initMap } //marker }

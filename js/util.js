@@ -1,3 +1,4 @@
+const ESC = 'Escape';
 const ALERT_SHOW_TIME = 5000;
 
 const getRandomIntInclusive = (min, max) => {
@@ -86,5 +87,6 @@ export {
   getRandomArray,
   checkRoomsNumber,
   checkGuestsNumber,
-  showAlert
+  showAlert,
+  ESC
 };

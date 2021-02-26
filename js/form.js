@@ -1,6 +1,7 @@
-import {MAX_ROOMS_NUMBER} from './data.js';
-import {showAlert} from './util.js';
-import {sendData} from './api.js';
+import { MAX_ROOMS_NUMBER } from './data.js';
+import { sendData } from './api.js';
+import { showSuccessMessage, showErrorMessage } from './message.js';
+// import { marker } from './map.js';
 
 const adForm = document.querySelector('.ad-form');
 const mapFilters = document.querySelector('.map__filters');
@@ -106,16 +107,24 @@ const initListeners = () => {
   });
 };
 
-const setAdFormSubmit = (onSuccess) => {
+const setAdFormSubmit = () => {
   adForm.addEventListener('submit', (evt) => {
     evt.preventDefault();
 
     sendData(
-      () => onSuccess(),
-      () => showAlert('Не удалось отправить форму. Попробуйте ещё раз'),
+      () => showSuccessMessage(),
+      () => showErrorMessage(),
       new FormData(evt.target),
     );
   });
 };
 
-export { address, deactivateAdForm, activateAdForm, initListeners, setAdFormSubmit }
+const setAdFormReset = () => {
+  const buttonReset = adForm.querySelector('.ad-form__reset');
+  buttonReset.addEventListener('click', () => {
+    adForm.reset();
+    // marker.setLatLng(MAIN_LATITUDE, MAIN_LONGITUDE);
+  })
+};
+
+export { address, deactivateAdForm, activateAdForm, initListeners, setAdFormSubmit, setAdFormReset }
