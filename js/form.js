@@ -116,7 +116,7 @@ const setAdFormSubmit = () => {
         showSuccessMessage();
         adForm.reset();
         resetMainMarker();
-        setAddress(); // здесь работает
+        setAddress();
       },
       () => showErrorMessage(),
       new FormData(evt.target),
@@ -129,7 +129,7 @@ const setAdFormReset = () => {
   buttonReset.addEventListener('click', () => {
     adForm.reset();
     resetMainMarker();
-    setAddress(); // а здесь не работает! поле остается пустым
+    setAddress();
   })
 };
 
