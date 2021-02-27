@@ -1,5 +1,4 @@
 const ALERT_SHOW_TIME = 5000;
-// const ESC = 'Escape';
 
 const isEscEvent = (evt) => {
   return evt.key === ('Escape' || 'Esc');
@@ -94,6 +93,5 @@ export {
   checkRoomsNumber,
   checkGuestsNumber,
   showAlert,
-  //ESC,
   isEscEvent
 };
