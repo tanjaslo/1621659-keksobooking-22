@@ -1,12 +1,5 @@
 import {checkRoomsNumber, checkGuestsNumber} from './util.js';
 
-const HOUSING_TYPES = [
-  'bungalow',
-  'flat',
-  'house',
-  'palace',
-];
-
 const HOUSING = {
   bungalow: 'Бунгало',
   flat: 'Квартира',
