@@ -1,5 +1,9 @@
-const ESC = 'Escape';
 const ALERT_SHOW_TIME = 5000;
+// const ESC = 'Escape';
+
+const isEscEvent = (evt) => {
+  return evt.key === ('Escape' || 'Esc');
+};
 
 const getRandomIntInclusive = (min, max) => {
   if (min >= max || min < 0 || max < 0) {
@@ -28,14 +32,16 @@ const getRandomArray = (array) => {
 
 // пока поставила свой первый вариант функции для опеределения окончаний, т.к. твой вариант не работает корректно, позже разберусь
 const checkRoomsNumber = (rooms) => {
-  if (rooms === 1 || rooms > 20 && rooms % 10 === 1 && rooms % 100 !== 11)
-  { return rooms + ' комната'; }
-  if (rooms >= 2 && rooms <= 4 || rooms % 10 >= 2 && rooms % 10 <=4 && rooms % 100 > 20)
-  { return rooms + ' комнаты'; }
-  else { return rooms + ' комнат'; }
+  if (rooms === 1 || rooms > 20 && rooms % 10 === 1 && rooms % 100 !== 11) {
+    return rooms + ' комната';
+  }
+  if (rooms >= 2 && rooms <= 4 || rooms % 10 >= 2 && rooms % 10 <=4 && rooms % 100 > 20) {
+    return rooms + ' комнаты';
+  } else {
+    return rooms + ' комнат';
+  }
 };
-
-/*
+/* TODO
 const checkRoomsNumber = (rooms) => {
   const val = rooms.length % 10;
   const val2 = rooms.length % 100;
@@ -59,7 +65,7 @@ const checkGuestsNumber = (guests) => {
 const showAlert = (message) => {
   const alertContainer = document.createElement('div');
 
-  alertContainer.style.zIndex = 100;
+  alertContainer.style.zIndex = 9999;
   alertContainer.style.position = 'fixed';
   alertContainer.style.left = 0;
   alertContainer.style.top = 0;
@@ -88,5 +94,6 @@ export {
   checkRoomsNumber,
   checkGuestsNumber,
   showAlert,
-  ESC
+  //ESC,
+  isEscEvent
 };

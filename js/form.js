@@ -1,4 +1,3 @@
-import { MAX_ROOMS_NUMBER } from './data.js';
 import { sendData } from './api.js';
 import { showSuccessMessage, showErrorMessage } from './message.js';
 import { setAddress, resetMainMarker } from './map.js';
@@ -16,6 +15,7 @@ const roomNumber = document.querySelector('#room_number');
 const roomCapacity = document.querySelector('#capacity');
 const optionCapacity = roomCapacity.querySelectorAll('option');
 
+const MAX_ROOMS_NUMBER = 100;
 const MIN_TITLE_LENGTH = 30;
 const MAX_TITLE_LENGTH = 100;
 
@@ -69,6 +69,25 @@ const initListeners = () => {
     checkInList.selectedIndex = checkOutList.selectedIndex;
   });
 
+  // пока оставлю это здесь :)
+  // TODO можно не переделывать. но можно сделать так:
+  // const getTitleError = (valueLength) => {
+  //   if (valueLength < MIN_TITLE_LENGTH) {
+  //     return `Ещё ${(MIN_TITLE_LENGTH - valueLength)} симв.`;
+  //   }
+  //   if (valueLength > MAX_TITLE_LENGTH) {
+  //     return `Удалите лишние ${(valueLength - MAX_TITLE_LENGTH)} симв.`;
+  //   }
+  //   return '';
+  // }
+  //
+  // advertTitle.addEventListener('input', (evt) => {
+  //   const element = evt.target;
+  //   const errorMessage = getTitleError(element.value.length);
+  //   element.setCustomValidity(errorMessage);
+  //   element.reportValidity();
+  // });
+
   advertTitle.addEventListener('input', () => {
     const valueLength = advertTitle.value.length;
     if (valueLength < MIN_TITLE_LENGTH) {
@@ -81,11 +100,13 @@ const initListeners = () => {
     advertTitle.reportValidity();
   });
 
-  price.addEventListener('invalid', () => {
+  price.addEventListener('input', () => {
+    const minPrice = getHousingPrice(typeList.value);
+
     if (price.validity.valueMissing) {
       price.setCustomValidity('Это поле обязательно для заполнения');
-    } else if (price.value < price.min) {
-      price.setCustomValidity(`Стоимость должна быть не менее ${price.min}`);
+    } else if (price.value < minPrice) {
+      price.setCustomValidity(`Стоимость должна быть не менее ${minPrice}`);
     } else {
       price.setCustomValidity('');
     }

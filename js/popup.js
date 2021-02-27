@@ -1,5 +1,22 @@
-import { getHousingType } from './data.js';
 import {checkRoomsNumber, checkGuestsNumber} from './util.js';
+
+const HOUSING_TYPES = [
+  'bungalow',
+  'flat',
+  'house',
+  'palace',
+];
+
+const HOUSING = {
+  bungalow: 'Бунгало',
+  flat: 'Квартира',
+  house: 'Дом',
+  palace: 'Дворец',
+};
+
+const getHousingType = (type) => {
+  return HOUSING[type];
+};
 
 const advertTemplate = document.querySelector('#card').content.querySelector('.popup');
 
@@ -28,8 +45,8 @@ const createAdvertElement = ({author, offer}) => {
   offer.photos.forEach(photo => {
     const photoElement = document.createElement('img');
     photoElement.src = `${photo}`;
-    photoElement.height = '40';
-    photoElement.width = '45';
+    photoElement.height = 40;
+    photoElement.width = 45;
     photoElement.classList.add('popup__photo');
     photoList.appendChild(photoElement);
   });
@@ -39,10 +56,4 @@ const createAdvertElement = ({author, offer}) => {
   return advertElement;
 };
 
-const renderSimilarAdverts = (advert) => {
-  const advertCard = createAdvertElement(advert);
-  const mapFragment = document.createDocumentFragment();
-  mapFragment.appendChild(advertCard);
-};
-
-export { createAdvertElement, renderSimilarAdverts }
+export { createAdvertElement }
