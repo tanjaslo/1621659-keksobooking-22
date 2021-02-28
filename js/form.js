@@ -1,10 +1,9 @@
 import { sendData } from './api.js';
 import { showSuccessMessage, showErrorMessage } from './message.js';
 import { setAddress, resetMainMarker } from './map.js';
+import { deactivateFilterForm, activateFilterForm } from './filter.js';
 
 const adForm = document.querySelector('.ad-form');
-const mapFilters = document.querySelector('.map__filters');
-const mapFeatures = document.querySelector('.map__features');
 const address = document.querySelector('#address');
 const typeList = document.querySelector('#type');
 const price = document.querySelector('#price');
@@ -31,11 +30,7 @@ const deactivateAdForm = () => {
   adForm.querySelectorAll('.ad-form fieldset').forEach((fieldset) => {
     fieldset.setAttribute('disabled', 'disabled');
   })
-  mapFilters.classList.add('map__filters--disabled');
-  mapFilters.querySelectorAll('.map__filter').forEach((filter) => {
-    filter.setAttribute('disabled', '');
-  })
-  mapFeatures.setAttribute('disabled', 'disabled');
+  deactivateFilterForm();
 };
 
 const activateAdForm = () => {
@@ -44,11 +39,7 @@ const activateAdForm = () => {
     fieldset.removeAttribute('disabled');
   })
   address.setAttribute('readonly', 'readonly');
-  mapFilters.classList.remove('map__filters--disabled');
-  mapFilters.querySelectorAll('.map__filter').forEach((filter) => {
-    filter.removeAttribute('disabled');
-  })
-  mapFeatures.removeAttribute('disabled');
+  activateFilterForm();
 };
 
 const getHousingPrice = (type) => {
