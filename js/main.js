@@ -3,12 +3,14 @@ import { deactivateAdForm, initListeners, setAdFormSubmit, setAdFormReset } from
 import { getData } from './api.js';
 import { initMap } from './map.js';
 
+const ADVERTS_COUNT = 10;
+
 deactivateAdForm();
-initListeners();
 
 getData((adverts) => {
-  initMap(adverts);
+  initMap(adverts.slice(0, ADVERTS_COUNT));
 });
 
+initListeners();
 setAdFormSubmit();
 setAdFormReset();
