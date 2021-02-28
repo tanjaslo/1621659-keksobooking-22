@@ -1,10 +1,14 @@
 import './popup.js';
-import { deactivateAdForm, initListeners } from './form.js';
-import { createSimilarAdverts } from './data.js';
+import { deactivateAdForm, initListeners, setAdFormSubmit, setAdFormReset } from './form.js';
+import { getData } from './api.js';
 import { initMap } from './map.js';
-
-const similarAdverts = createSimilarAdverts();
 
 deactivateAdForm();
 initListeners();
-initMap(similarAdverts);
+
+getData((adverts) => {
+  initMap(adverts);
+});
+
+setAdFormSubmit();
+setAdFormReset();
