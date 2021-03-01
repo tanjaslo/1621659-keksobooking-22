@@ -9,19 +9,13 @@ const closeButton = errorMessage.querySelector('.error__button');
 const onPopupEscKeydown = (evt) => {
   if (isEscEvent(evt)) {
     evt.preventDefault();
-    if (successMessage) {
-      removeSuccessMessage();
-    }
-    removeErrorMessage();
+    removeMessage();
   }
 };
 
 const onClick = (evt) => {
   evt.preventDefault();
-  if (successMessage) {
-    removeSuccessMessage();
-  }
-  removeErrorMessage();
+  removeMessage();
 };
 
 const showMessage = (message) => {
@@ -38,26 +32,18 @@ const showSuccessMessage = () => {
 
 const showErrorMessage = () => {
   showMessage(errorMessage);
-  if (closeButton) {
-    closeButton.addEventListener('click', onClick);
-  }
+  closeButton.addEventListener('click', onClick);
 };
 
-const removeMessage = (message) => {
-  message.classList.add('hidden');
+const removeMessage = () => {
   document.removeEventListener('click', onClick);
   document.removeEventListener('keydown', onPopupEscKeydown);
-};
 
-const removeSuccessMessage = () => {
-  removeMessage(successMessage);
-};
-
-const removeErrorMessage = () => {
-  removeMessage(errorMessage);
-  if (closeButton) {
-    closeButton.removeEventListener('click', onClick);
+  if (successMessage) {
+    successMessage.classList.add('hidden');
   }
+  errorMessage.classList.add('hidden');
+  closeButton.removeEventListener('click', onClick);
 };
 
 export { showSuccessMessage, showErrorMessage }
