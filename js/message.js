@@ -18,7 +18,9 @@ const onPopupEscKeydown = (evt) => {
 
 const onClick = (evt) => {
   evt.preventDefault();
-  removeSuccessMessage();
+  if (successMessage) {
+    removeSuccessMessage();
+  }
   removeErrorMessage();
 };
 
