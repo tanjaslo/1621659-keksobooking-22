@@ -1,7 +1,9 @@
 import './popup.js';
-import { deactivateAdForm, initListeners, setAdFormSubmit, setAdFormReset } from './form.js';
+import './message.js';
+import './filter.js';
 import { getData } from './api.js';
 import { initMap } from './map.js';
+import { deactivateAdForm, initListeners, setAdFormSubmit, setAdFormReset } from './form.js';
 
 const ADVERTS_COUNT = 10;
 
