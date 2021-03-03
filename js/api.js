@@ -30,9 +30,7 @@ const sendData = (onSuccess, onError, body) => {
         onError();
       }
     })
-    .catch(() => {
-      onError();
-    });
+    .catch(onError);
 };
 
 export { getData, sendData }
