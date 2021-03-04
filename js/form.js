@@ -138,7 +138,8 @@ const setAdFormSubmit = () => {
 
 const setAdFormReset = () => {
   const buttonReset = adForm.querySelector('.ad-form__reset');
-  buttonReset.addEventListener('click', () => {
+  buttonReset.addEventListener('click', (evt) => {
+    evt.preventDefault();
     adForm.reset();
     resetMainMarker();
     setAddress();

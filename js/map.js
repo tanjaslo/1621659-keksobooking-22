@@ -90,8 +90,14 @@ const resetMainMarker = () => {
   map.setView(new window.L.LatLng(MAIN_LATITUDE, MAIN_LONGITUDE), MAIN_ZOOM);
 };
 
+const removeMarkers = () => {
+  markers.forEach(marker => {
+    marker.remove();
+  })
+};
+
 const setAddress = () => {
   address.value = `${MAIN_LATITUDE}, ${MAIN_LONGITUDE}`;
 };
 
-export { initMap, setAddress, resetMainMarker, markers, setAllMarkers }
+export { initMap, setAddress, resetMainMarker, markers, setAllMarkers, removeMarkers }
