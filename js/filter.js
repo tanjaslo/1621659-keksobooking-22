@@ -1,4 +1,4 @@
-import { removeMarkers, setAllMarkers } from './map.js';
+import { removeMarkers, setMarkers } from './map.js';
 
 const mapFilters = document.querySelector('.map__filters');
 const mapFeatures = document.querySelector('.map__features');
@@ -20,27 +20,27 @@ const activateFilterForm = () => {
   mapFeatures.removeAttribute('disabled');
 };
 
-const setFilteredMarkers = (adverts) => {
+const initTypeFilterListener = (adverts) => {
   housingTypeFilter.addEventListener('change', (evt) => {
     if (evt.target.value !== 'any') {
       removeMarkers();
-      setAllMarkers(adverts
+      setMarkers(adverts
         .filter((advert) => advert.offer.type === evt.target.value));
     } else {
-      setAllMarkers(adverts);
+      setMarkers(adverts);
     }
   });
 };
 
-const resetFilters = (adverts) => {
+const initResetButtonListener = (adverts) => {
   const buttonReset = document.querySelector('.ad-form__reset');
   buttonReset.addEventListener('click', (evt) => {
     evt.preventDefault();
 
     mapFilters.reset();
     removeMarkers();
-    setAllMarkers(adverts);
+    setMarkers(adverts);
   });
 }
 
-export { deactivateFilterForm, activateFilterForm, setFilteredMarkers, resetFilters }
+export { deactivateFilterForm, activateFilterForm, initTypeFilterListener, initResetButtonListener }

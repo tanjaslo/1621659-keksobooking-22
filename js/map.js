@@ -1,6 +1,6 @@
 import { address, activateAdForm } from './form.js';
 import { createAdvertElement } from './popup.js';
-import { setFilteredMarkers } from './filter.js';
+import { initTypeFilterListener } from './filter.js';
 
 const MAIN_LATITUDE = 35.68950;
 const MAIN_LONGITUDE = 139.69171;
@@ -21,8 +21,8 @@ const initMap = (adverts) => {
     mainMarker.addTo(map);
     activateAdForm();
     setAddress();
-    setAllMarkers(adverts);
-    setFilteredMarkers(adverts);
+    setMarkers(adverts);
+    initTypeFilterListener(adverts);
   })
     .setView({
       lat: MAIN_LATITUDE,
@@ -32,7 +32,7 @@ const initMap = (adverts) => {
 
 const markers = [];
 
-const setAllMarkers = (adverts) => {
+const setMarkers = (adverts) => {
   adverts.forEach((advert) => {
     const advertPinIcon = window.L.icon({
       iconUrl: 'img/pin.svg',
@@ -100,4 +100,4 @@ const setAddress = () => {
   address.value = `${MAIN_LATITUDE}, ${MAIN_LONGITUDE}`;
 };
 
-export { initMap, setAddress, resetMainMarker, markers, setAllMarkers, removeMarkers }
+export { initMap, setAddress, resetMainMarker, markers, setMarkers, removeMarkers }
