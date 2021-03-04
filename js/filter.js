@@ -1,20 +1,21 @@
 import { removeMarkers, setMarkers } from './map.js';
 
-const mapFilters = document.querySelector('.map__filters');
+const mapFiltersForm = document.querySelector('.map__filters');
+const mapFilters = mapFiltersForm.querySelectorAll('.map__filter')
 const mapFeatures = document.querySelector('.map__features');
-const housingTypeFilter = mapFilters.querySelector('#housing-type');
+const housingTypeFilter = mapFiltersForm.querySelector('#housing-type');
 
 const deactivateFilterForm = () => {
-  mapFilters.classList.add('map__filters--disabled');
-  mapFilters.querySelectorAll('.map__filter').forEach((filter) => {
+  mapFiltersForm.classList.add('map__filters--disabled');
+  mapFilters.forEach((filter) => {
     filter.setAttribute('disabled', '');
   })
   mapFeatures.setAttribute('disabled', 'disabled');
 };
 
 const activateFilterForm = () => {
-  mapFilters.classList.remove('map__filters--disabled');
-  mapFilters.querySelectorAll('.map__filter').forEach((filter) => {
+  mapFiltersForm.classList.remove('map__filters--disabled');
+  mapFilters.forEach((filter) => {
     filter.removeAttribute('disabled');
   })
   mapFeatures.removeAttribute('disabled');
@@ -37,7 +38,7 @@ const initResetButtonListener = (adverts) => {
   buttonReset.addEventListener('click', (evt) => {
     evt.preventDefault();
 
-    mapFilters.reset();
+    mapFiltersForm.reset();
     removeMarkers();
     setMarkers(adverts);
   });
