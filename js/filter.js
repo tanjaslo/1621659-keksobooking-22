@@ -1,3 +1,4 @@
+/* global _:readonly */
 import { removeMarkers, setMarkers } from './map.js';
 
 const mapFiltersForm = document.querySelector('.map__filters');
@@ -8,6 +9,7 @@ const housingPriceFilter = mapFiltersForm.querySelector('#housing-price');
 const housingRoomsFilter = mapFiltersForm.querySelector('#housing-rooms');
 const housingGuestsFilter = mapFiltersForm.querySelector('#housing-guests');
 
+const RERENDER_DELAY = 500;
 const PRICE_LOW = 10000;
 const PRICE_HIGH = 50000;
 
@@ -88,12 +90,14 @@ const getFilteredAdverts = (adverts) => {
   return filteredAdverts;
 };
 
+const onFilterChange = (adverts) => {
+  const filteredAdverts = getFilteredAdverts(adverts);
+  removeMarkers();
+  setMarkers(filteredAdverts);
+};
+
 const initFilterChangeListener = (adverts) => {
-  mapFiltersForm.addEventListener('change', () => {
-    const filteredAdverts = getFilteredAdverts(adverts);
-    removeMarkers();
-    setMarkers(filteredAdverts);
-  })
+  mapFiltersForm.addEventListener('change', _.debounce(() => {onFilterChange(adverts)}, RERENDER_DELAY));
 };
 
 export { deactivateFilterForm, activateFilterForm, initResetButtonListener, initFilterChangeListener }
