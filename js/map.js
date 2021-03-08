@@ -1,6 +1,5 @@
 import { address, activateAdForm } from './form.js';
 import { createAdvertElement } from './popup.js';
-import { initTypeFilterListener } from './filter.js';
 
 const MAIN_LATITUDE = 35.68950;
 const MAIN_LONGITUDE = 139.69171;
@@ -22,7 +21,6 @@ const initMap = (adverts) => {
     activateAdForm();
     setAddress();
     setMarkers(adverts);
-    initTypeFilterListener(adverts);
   })
     .setView({
       lat: MAIN_LATITUDE,
