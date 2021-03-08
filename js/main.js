@@ -1,4 +1,3 @@
-/* global _:readonly */
 import './popup.js';
 import './message.js';
 import { getData } from './api.js';
