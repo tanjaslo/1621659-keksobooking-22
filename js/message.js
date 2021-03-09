@@ -38,10 +38,7 @@ const showErrorMessage = () => {
 const removeMessage = () => {
   document.removeEventListener('click', onClick);
   document.removeEventListener('keydown', onPopupEscKeydown);
-
-  if (successMessage) {
-    successMessage.classList.add('hidden');
-  }
+  successMessage.classList.add('hidden');
   errorMessage.classList.add('hidden');
   closeButton.removeEventListener('click', onClick);
 };
