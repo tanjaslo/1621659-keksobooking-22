@@ -1,15 +1,4 @@
-import {checkRoomsNumber, checkGuestsNumber} from './util.js';
-
-const HOUSING = {
-  bungalow: 'Бунгало',
-  flat: 'Квартира',
-  house: 'Дом',
-  palace: 'Дворец',
-};
-
-const getHousingType = (type) => {
-  return HOUSING[type];
-};
+import { checkRoomsNumber, checkGuestsNumber, getHousingType } from './util.js';
 
 const advertTemplate = document.querySelector('#card').content.querySelector('.popup');
 
@@ -25,7 +14,7 @@ const createAdvertElement = ({author, offer}) => {
 
   const featureList = advertElement.querySelector('.popup__features');
   featureList.innerHTML = '';
-  offer.features.forEach(feature => {
+  offer.features.forEach((feature) => {
     const featureElement = document.createElement('li');
     featureElement.classList.add('popup__feature', `popup__feature--${feature}`);
     featureList.appendChild(featureElement);
@@ -35,7 +24,7 @@ const createAdvertElement = ({author, offer}) => {
 
   const photoList = advertElement.querySelector('.popup__photos');
   photoList.innerHTML = '';
-  offer.photos.forEach(photo => {
+  offer.photos.forEach((photo) => {
     const photoElement = document.createElement('img');
     photoElement.src = `${photo}`;
     photoElement.height = 40;

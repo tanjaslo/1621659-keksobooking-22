@@ -1,7 +1,18 @@
 const ALERT_SHOW_TIME = 5000;
 
+const HOUSING = {
+  bungalow: 'Бунгало',
+  flat: 'Квартира',
+  house: 'Дом',
+  palace: 'Дворец',
+};
+
 const isEscEvent = (evt) => {
   return evt.key === 'Escape' || evt.key === 'Esc';
+};
+
+const getHousingType = (type) => {
+  return HOUSING[type];
 };
 
 const checkRoomsNumber = (rooms) => {
@@ -64,6 +75,7 @@ const debounce = (func, wait, immediate) => {
 export {
   checkRoomsNumber,
   checkGuestsNumber,
+  getHousingType,
   showAlert,
   isEscEvent,
   debounce
