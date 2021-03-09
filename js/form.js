@@ -2,11 +2,12 @@ import { sendData } from './api.js';
 import { showSuccessMessage, showErrorMessage } from './message.js';
 import { setAddress, resetMainMarker } from './map.js';
 import { deactivateFilterForm, activateFilterForm } from './filter.js';
+import { getHousingPrice } from './util.js';
 
 const adForm = document.querySelector('.ad-form');
 const address = document.querySelector('#address');
 const typeList = document.querySelector('#type');
-const price = document.querySelector('#price');
+const priceInput = document.querySelector('#price');
 const checkInList = document.querySelector('#timein');
 const checkOutList = document.querySelector('#timeout');
 const advertTitle = document.querySelector('#title');
@@ -17,13 +18,6 @@ const optionCapacity = roomCapacity.querySelectorAll('option');
 const MAX_ROOMS_NUMBER = 100;
 const MIN_TITLE_LENGTH = 30;
 const MAX_TITLE_LENGTH = 100;
-
-const HOUSING_PRICE = {
-  bungalow: 0,
-  flat: 1000,
-  house: 5000,
-  palace: 10000,
-};
 
 const deactivateAdForm = () => {
   adForm.classList.add('ad-form--disabled');
@@ -42,14 +36,10 @@ const activateAdForm = () => {
   activateFilterForm();
 };
 
-const getHousingPrice = (type) => {
-  return HOUSING_PRICE[type];
-};
-
 const initListeners = () => {
   typeList.addEventListener('change', () => {
-    price.placeholder = getHousingPrice(typeList.value);
-    price.min = getHousingPrice(typeList.value);
+    priceInput.placeholder = getHousingPrice(typeList.value);
+    priceInput.min = getHousingPrice(typeList.value);
   });
 
   checkInList.addEventListener('change', () => {
@@ -59,26 +49,9 @@ const initListeners = () => {
   checkOutList.addEventListener('change', () => {
     checkInList.selectedIndex = checkOutList.selectedIndex;
   });
+};
 
-  // пока оставлю это здесь :)
-  // TODO можно не переделывать. но можно сделать так:
-  // const getTitleError = (valueLength) => {
-  //   if (valueLength < MIN_TITLE_LENGTH) {
-  //     return `Ещё ${(MIN_TITLE_LENGTH - valueLength)} симв.`;
-  //   }
-  //   if (valueLength > MAX_TITLE_LENGTH) {
-  //     return `Удалите лишние ${(valueLength - MAX_TITLE_LENGTH)} симв.`;
-  //   }
-  //   return '';
-  // }
-  //
-  // advertTitle.addEventListener('input', (evt) => {
-  //   const element = evt.target;
-  //   const errorMessage = getTitleError(element.value.length);
-  //   element.setCustomValidity(errorMessage);
-  //   element.reportValidity();
-  // });
-
+const setFormValidity = () => {
   advertTitle.addEventListener('input', () => {
     const valueLength = advertTitle.value.length;
     if (valueLength < MIN_TITLE_LENGTH) {
@@ -91,17 +64,17 @@ const initListeners = () => {
     advertTitle.reportValidity();
   });
 
-  price.addEventListener('input', () => {
+  priceInput.addEventListener('input', () => {
     const minPrice = getHousingPrice(typeList.value);
 
-    if (price.validity.valueMissing) {
-      price.setCustomValidity('Это поле обязательно для заполнения');
-    } else if (price.value < minPrice) {
-      price.setCustomValidity(`Стоимость должна быть не менее ${minPrice}`);
+    if (priceInput.validity.valueMissing) {
+      priceInput.setCustomValidity('Это поле обязательно для заполнения');
+    } else if (priceInput.value < minPrice) {
+      priceInput.setCustomValidity(`Стоимость должна быть не менее ${minPrice}`);
     } else {
-      price.setCustomValidity('');
+      priceInput.setCustomValidity('');
     }
-    price.reportValidity();
+    priceInput.reportValidity();
   });
 
   roomNumber.addEventListener('change', () => {
@@ -146,4 +119,4 @@ const setAdFormReset = () => {
   })
 };
 
-export { address, deactivateAdForm, activateAdForm, initListeners, setAdFormSubmit, setAdFormReset }
+export { address, deactivateAdForm, activateAdForm, initListeners, setFormValidity, setAdFormSubmit, setAdFormReset }

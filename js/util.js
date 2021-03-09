@@ -7,12 +7,19 @@ const HOUSING = {
   palace: 'Дворец',
 };
 
-const isEscEvent = (evt) => {
-  return evt.key === 'Escape' || evt.key === 'Esc';
+const HOUSING_PRICE = {
+  bungalow: 0,
+  flat: 1000,
+  house: 5000,
+  palace: 10000,
 };
 
 const getHousingType = (type) => {
   return HOUSING[type];
+};
+
+const getHousingPrice = (type) => {
+  return HOUSING_PRICE[type];
 };
 
 const checkRoomsNumber = (rooms) => {
@@ -32,6 +39,10 @@ const checkRoomsNumber = (rooms) => {
 
 const checkGuestsNumber = (guests) => {
   return guests === 1 || guests > 20 && guests % 10 === 1 && guests % 100 !== 11 ? `${guests} гостя` : `${guests} гостей`;
+};
+
+const isEscEvent = (evt) => {
+  return evt.key === 'Escape' || evt.key === 'Esc';
 };
 
 const showAlert = (message) => {
@@ -76,6 +87,7 @@ export {
   checkRoomsNumber,
   checkGuestsNumber,
   getHousingType,
+  getHousingPrice,
   showAlert,
   isEscEvent,
   debounce

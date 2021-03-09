@@ -9,7 +9,7 @@ const housingPriceFilter = mapFiltersForm.querySelector('#housing-price');
 const housingRoomsFilter = mapFiltersForm.querySelector('#housing-rooms');
 const housingGuestsFilter = mapFiltersForm.querySelector('#housing-guests');
 
-const ADVERTS_COUNT = 10;
+const MAX_FILTERED_COUNT = 10;
 const RERENDER_DELAY = 500;
 const PRICE_LOW = 10000;
 const PRICE_HIGH = 50000;
@@ -75,27 +75,43 @@ const priceFilter = (advert) => {
   }
 };
 
+const isAdvertMatched = (advert) => {
+  if (
+    featuresFilter(advert) &&
+    roomsFilter(advert) &&
+    capacityFilter(advert) &&
+    priceFilter(advert) &&
+    typeFilter(advert)
+  )
+    return true;
+};
+
 const getFilteredAdverts = (adverts) => {
-  const filteredAdverts = adverts.filter((advert) => {
-    return (
-      featuresFilter(advert) &&
-      roomsFilter(advert) &&
-      capacityFilter(advert) &&
-      priceFilter(advert) &&
-      typeFilter(advert)
-    )
-  })
+  const filteredAdverts = [];
+  for (let i = 0; i < adverts.length; i++) {
+    const advert = adverts[i];
+    if (isAdvertMatched(advert)) {
+      filteredAdverts.push(advert);
+    }
+    if (filteredAdverts.length === MAX_FILTERED_COUNT) {
+      return filteredAdverts;
+    }
+  }
   return filteredAdverts;
 };
+
+const debouncedOnFilterChange = debounce((adverts) => {
+  onFilterChange(adverts)
+}, RERENDER_DELAY);
 
 const onFilterChange = (adverts) => {
   const filteredAdverts = getFilteredAdverts(adverts);
   removeMarkers();
-  setMarkers(filteredAdverts.slice(0, ADVERTS_COUNT));
+  setMarkers(filteredAdverts);
 };
 
 const initFilterChangeListener = (adverts) => {
-  mapFiltersForm.addEventListener('change', debounce(() => {onFilterChange(adverts)}, RERENDER_DELAY));
+  mapFiltersForm.addEventListener('change', () => debouncedOnFilterChange(adverts));
 };
 
 export { deactivateFilterForm, activateFilterForm, initResetButtonListener, initFilterChangeListener }
