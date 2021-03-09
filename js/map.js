@@ -8,6 +8,13 @@ const MAIN_ZOOM = 9;
 const MAIN_PIN_WIDTH = 52;
 const PIN_WIDTH = 40;
 const map = window.L.map('map-canvas');
+const markers = [];
+const mainPinIcon = window.L.icon({
+  iconUrl: 'img/main-pin.svg',
+  iconSize: [MAIN_PIN_WIDTH, MAIN_PIN_WIDTH],
+  iconAnchor: [MAIN_PIN_WIDTH/2, MAIN_PIN_WIDTH],
+});
+const mainMarker = window.L.marker({ lat: MAIN_LATITUDE, lng: MAIN_LONGITUDE}, {draggable: true, icon: mainPinIcon});
 const tileLayer = window.L.tileLayer(
   'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
   {
@@ -17,10 +24,10 @@ const tileLayer = window.L.tileLayer(
 const initMap = (adverts) => {
   map.on('load', () => {
     tileLayer.addTo(map);
-    mainMarker.addTo(map);
     activateAdForm();
     setAddress();
     setMarkers(adverts);
+    initMainMarker();
   })
     .setView({
       lat: MAIN_LATITUDE,
@@ -28,7 +35,16 @@ const initMap = (adverts) => {
     }, MAIN_ZOOM);
 };
 
-const markers = [];
+const initMainMarker = () => {
+  mainMarker.addTo(map),
+
+  mainMarker.on('moveend', (evt) => {
+    const coords = evt.target.getLatLng();
+    const lat = coords.lat.toFixed(LOCATION_FLOAT);
+    const lng = coords.lng.toFixed(LOCATION_FLOAT);
+    address.value = `${lat}, ${lng}`;
+  })
+};
 
 const setMarkers = (adverts) => {
   adverts.forEach((advert) => {
@@ -54,34 +70,6 @@ const setMarkers = (adverts) => {
     markers.push(marker);
   })
 };
-
-const initMainMarker = () => {
-  const mainPinIcon = window.L.icon({
-    iconUrl: 'img/main-pin.svg',
-    iconSize: [MAIN_PIN_WIDTH, MAIN_PIN_WIDTH],
-    iconAnchor: [MAIN_PIN_WIDTH/2, MAIN_PIN_WIDTH],
-  });
-
-  const mainMarker = window.L.marker(
-    {
-      lat: MAIN_LATITUDE,
-      lng: MAIN_LONGITUDE,
-    },
-    {
-      draggable: true,
-      icon: mainPinIcon,
-    },
-  );
-  mainMarker.on('moveend', (evt) => {
-    const coords = evt.target.getLatLng();
-    const lat = coords.lat.toFixed(LOCATION_FLOAT);
-    const lng = coords.lng.toFixed(LOCATION_FLOAT);
-    address.value = `${lat}, ${lng}`;
-  });
-  return mainMarker;
-};
-
-const mainMarker = initMainMarker();
 
 const resetMainMarker = () => {
   mainMarker.setLatLng(new window.L.LatLng(MAIN_LATITUDE, MAIN_LONGITUDE));

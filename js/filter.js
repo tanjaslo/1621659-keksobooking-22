@@ -1,5 +1,5 @@
-/* global _:readonly */
 import { removeMarkers, setMarkers } from './map.js';
+import { debounce } from './util.js';
 
 const mapFiltersForm = document.querySelector('.map__filters');
 const mapFilters = mapFiltersForm.querySelectorAll('.map__filter')
@@ -9,6 +9,7 @@ const housingPriceFilter = mapFiltersForm.querySelector('#housing-price');
 const housingRoomsFilter = mapFiltersForm.querySelector('#housing-rooms');
 const housingGuestsFilter = mapFiltersForm.querySelector('#housing-guests');
 
+const ADVERTS_COUNT = 10;
 const RERENDER_DELAY = 500;
 const PRICE_LOW = 10000;
 const PRICE_HIGH = 50000;
@@ -42,12 +43,12 @@ const initResetButtonListener = (adverts) => {
 
 const featuresFilter = (advert) => {
   const checkedFeatures = mapFiltersForm.querySelectorAll('.map__checkbox:checked');
-  let advertFeatures = [];
+  let i = 0;
   checkedFeatures.forEach((feature) => {
     if (advert.offer.features.includes(feature.value))
-      advertFeatures.push(advert);
+      i++;
   })
-  return advertFeatures.length === checkedFeatures.length;
+  return i === checkedFeatures.length;
 };
 
 const typeFilter  = (advert) => {
@@ -59,10 +60,7 @@ const roomsFilter = (advert) => {
 };
 
 const capacityFilter = (advert) => {
-  if (housingGuestsFilter.value !== 'any') {
-    return advert.offer.guests === Number(housingGuestsFilter.value);
-  }
-  return true;
+  return housingGuestsFilter.value === 'any' || advert.offer.guests === Number(housingGuestsFilter.value);
 };
 
 const priceFilter = (advert) => {
@@ -93,11 +91,11 @@ const getFilteredAdverts = (adverts) => {
 const onFilterChange = (adverts) => {
   const filteredAdverts = getFilteredAdverts(adverts);
   removeMarkers();
-  setMarkers(filteredAdverts);
+  setMarkers(filteredAdverts.slice(0, ADVERTS_COUNT));
 };
 
 const initFilterChangeListener = (adverts) => {
-  mapFiltersForm.addEventListener('change', _.debounce(() => {onFilterChange(adverts)}, RERENDER_DELAY));
+  mapFiltersForm.addEventListener('change', debounce(() => {onFilterChange(adverts)}, RERENDER_DELAY));
 };
 
 export { deactivateFilterForm, activateFilterForm, initResetButtonListener, initFilterChangeListener }
