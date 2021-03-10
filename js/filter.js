@@ -76,14 +76,13 @@ const priceFilter = (advert) => {
 };
 
 const isAdvertMatched = (advert) => {
-  if (
-    featuresFilter(advert) &&
+  if (featuresFilter(advert) &&
     roomsFilter(advert) &&
     capacityFilter(advert) &&
     priceFilter(advert) &&
-    typeFilter(advert)
-  )
+    typeFilter(advert)) {
     return true;
+  }
 };
 
 const getFilteredAdverts = (adverts) => {

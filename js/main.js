@@ -13,9 +13,9 @@ getData((adverts) => {
   initResetButtonListener(adverts);
   initFilterChangeListener(adverts);
 },
-() => {
+(error) => {
   deactivateAdForm();
-  showAlert('Не удалось загрузить данные с сервера :(')
+  showAlert(error)
 });
 
 initListeners();

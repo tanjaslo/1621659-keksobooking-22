@@ -1,4 +1,4 @@
-import { checkRoomsNumber, checkGuestsNumber, getHousingType } from './util.js';
+import { declOfRoomsNumber, declOfGuestsNumber, getHousingType } from './util.js';
 
 const advertTemplate = document.querySelector('#card').content.querySelector('.popup');
 
@@ -9,7 +9,7 @@ const createAdvertElement = ({author, offer}) => {
   advertElement.querySelector('.popup__text--address').textContent = offer.address;
   advertElement.querySelector('.popup__text--price').textContent = `${offer.price} ₽/ночь`;
   advertElement.querySelector('.popup__type').textContent = getHousingType(offer.type);
-  advertElement.querySelector('.popup__text--capacity').textContent = `${checkRoomsNumber(offer.rooms)} для ${checkGuestsNumber(offer.guests)}`;
+  advertElement.querySelector('.popup__text--capacity').textContent = `${declOfRoomsNumber(offer.rooms)} для ${declOfGuestsNumber(offer.guests)}`;
   advertElement.querySelector('.popup__text--time').textContent = `Заезд после ${offer.checkin}, выезд до ${offer.checkout}`;
 
   const featureList = advertElement.querySelector('.popup__features');

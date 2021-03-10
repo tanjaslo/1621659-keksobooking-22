@@ -1,4 +1,5 @@
 const ALERT_SHOW_TIME = 5000;
+const ALERT_MESSAGE = 'Не удалось загрузить данные с сервера :(';
 
 const HOUSING = {
   bungalow: 'Бунгало',
@@ -22,7 +23,7 @@ const getHousingPrice = (type) => {
   return HOUSING_PRICE[type];
 };
 
-const checkRoomsNumber = (rooms) => {
+const declOfRoomsNumber = (rooms) => {
   const val = rooms % 10;
   const val2 = rooms % 100;
   if ([11, 12, 13, 14].includes(val2)) {
@@ -37,7 +38,7 @@ const checkRoomsNumber = (rooms) => {
   return `${rooms} комнат`;
 };
 
-const checkGuestsNumber = (guests) => {
+const declOfGuestsNumber = (guests) => {
   return guests === 1 || guests > 20 && guests % 10 === 1 && guests % 100 !== 11 ? `${guests} гостя` : `${guests} гостей`;
 };
 
@@ -45,7 +46,7 @@ const isEscEvent = (evt) => {
   return evt.key === 'Escape' || evt.key === 'Esc';
 };
 
-const showAlert = (message) => {
+const showAlert = () => {
   const alertContainer = document.createElement('div');
 
   alertContainer.style.zIndex = 9999;
@@ -60,7 +61,7 @@ const showAlert = (message) => {
   alertContainer.style.textAlign = 'center';
   alertContainer.style.backgroundColor = 'red';
 
-  alertContainer.textContent = message;
+  alertContainer.textContent = ALERT_MESSAGE;
   document.body.append(alertContainer);
 
   setTimeout(() => {
@@ -71,21 +72,26 @@ const showAlert = (message) => {
 const debounce = (func, wait, immediate) => {
   let timeout;
   return function() {
-    const context = this, args = arguments;
-    const later = function() {
+    const context = this;
+    const args = arguments;
+    const later = () => {
       timeout = null;
-      if (!immediate) func.apply(context, args);
+      if (!immediate) {
+        func.apply(context, args);
+      }
     };
     const callNow = immediate && !timeout;
     clearTimeout(timeout);
     timeout = setTimeout(later, wait);
-    if (callNow) func.apply(context, args);
+    if (callNow) {
+      func.apply(context, args);
+    }
   };
 };
 
 export {
-  checkRoomsNumber,
-  checkGuestsNumber,
+  declOfRoomsNumber,
+  declOfGuestsNumber,
   getHousingType,
   getHousingPrice,
   showAlert,
