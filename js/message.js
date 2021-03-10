@@ -36,10 +36,7 @@ const showErrorMessage = () => {
 };
 
 const removeMessage = () => {
-  document.querySelectorAll('.success, .error').forEach((message) => {
-    message.remove();
-    message.classList.add('hidden');
-  });
+  document.querySelectorAll('.success, .error').forEach((message) => message.remove());
   document.removeEventListener('click', onClick);
   document.removeEventListener('keydown', onPopupEscKeydown);
   closeButton.removeEventListener('click', onClick);
