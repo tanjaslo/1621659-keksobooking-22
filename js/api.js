@@ -1,5 +1,3 @@
-import {showAlert} from './util.js';
-
 const SERVER_GET_URL = 'https://22.javascript.pages.academy/keksobooking/data';
 const SERVER_POST_URL = 'https://22.javascript.pages.academy/keksobooking';
 
@@ -9,7 +7,7 @@ const getData = (onSuccess, onError) => {
       if (response.ok) {
         return response.json();
       }
-      showAlert('Не удалось загрузить данные с сервера :(')
+      throw 'Не удалось загрузить данные с сервера :(';
     })
     .then(onSuccess)
     .catch(onError);
@@ -25,10 +23,9 @@ const sendData = (onSuccess, onError, body) => {
   )
     .then((response) => {
       if (response.ok) {
-        onSuccess();
-      } else {
-        onError();
+        return onSuccess();
       }
+      throw 'Не удалось загрузить данные :(';
     })
     .catch(onError);
 };

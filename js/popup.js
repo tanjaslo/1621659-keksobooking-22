@@ -1,15 +1,4 @@
-import {checkRoomsNumber, checkGuestsNumber} from './util.js';
-
-const HOUSING = {
-  bungalow: 'Бунгало',
-  flat: 'Квартира',
-  house: 'Дом',
-  palace: 'Дворец',
-};
-
-const getHousingType = (type) => {
-  return HOUSING[type];
-};
+import { declOfRoomsNumber, declOfGuestsNumber, getHousingType } from './util.js';
 
 const advertTemplate = document.querySelector('#card').content.querySelector('.popup');
 
@@ -20,12 +9,12 @@ const createAdvertElement = ({author, offer}) => {
   advertElement.querySelector('.popup__text--address').textContent = offer.address;
   advertElement.querySelector('.popup__text--price').textContent = `${offer.price} ₽/ночь`;
   advertElement.querySelector('.popup__type').textContent = getHousingType(offer.type);
-  advertElement.querySelector('.popup__text--capacity').textContent = `${checkRoomsNumber(offer.rooms)} для ${checkGuestsNumber(offer.guests)}`;
+  advertElement.querySelector('.popup__text--capacity').textContent = `${declOfRoomsNumber(offer.rooms)} для ${declOfGuestsNumber(offer.guests)}`;
   advertElement.querySelector('.popup__text--time').textContent = `Заезд после ${offer.checkin}, выезд до ${offer.checkout}`;
 
   const featureList = advertElement.querySelector('.popup__features');
   featureList.innerHTML = '';
-  offer.features.forEach(feature => {
+  offer.features.forEach((feature) => {
     const featureElement = document.createElement('li');
     featureElement.classList.add('popup__feature', `popup__feature--${feature}`);
     featureList.appendChild(featureElement);
@@ -35,7 +24,7 @@ const createAdvertElement = ({author, offer}) => {
 
   const photoList = advertElement.querySelector('.popup__photos');
   photoList.innerHTML = '';
-  offer.photos.forEach(photo => {
+  offer.photos.forEach((photo) => {
     const photoElement = document.createElement('img');
     photoElement.src = `${photo}`;
     photoElement.height = 40;
