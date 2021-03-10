@@ -23,7 +23,7 @@ const deactivateAdForm = () => {
   adForm.classList.add('ad-form--disabled');
   adForm.querySelectorAll('.ad-form fieldset').forEach((fieldset) => {
     fieldset.setAttribute('disabled', 'disabled');
-  })
+  });
   deactivateFilterForm();
 };
 
@@ -31,7 +31,7 @@ const activateAdForm = () => {
   adForm.classList.remove('ad-form--disabled');
   adForm.querySelectorAll('.ad-form fieldset').forEach((fieldset) => {
     fieldset.removeAttribute('disabled');
-  })
+  });
   address.setAttribute('readonly', 'readonly');
   activateFilterForm();
 };
@@ -116,7 +116,7 @@ const setAdFormReset = () => {
     adForm.reset();
     resetMainMarker();
     setAddress();
-  })
+  });
 };
 
 export { address, deactivateAdForm, activateAdForm, initListeners, setFormValidity, setAdFormSubmit, setAdFormReset }

@@ -6,16 +6,14 @@ import { showAlert } from './util.js';
 import { deactivateAdForm, initListeners, setFormValidity, setAdFormSubmit, setAdFormReset } from './form.js';
 import { initResetButtonListener, initFilterChangeListener } from './filter.js';
 
-const ADVERTS_COUNT = 10;
-
 getData((adverts) => {
-  initMap(adverts.slice(0, ADVERTS_COUNT));
+  initMap(adverts);
   initResetButtonListener(adverts);
   initFilterChangeListener(adverts);
 },
 (error) => {
   deactivateAdForm();
-  showAlert(error)
+  showAlert(error);
 });
 
 initListeners();

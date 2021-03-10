@@ -1,6 +1,7 @@
 import { address, activateAdForm } from './form.js';
 import { createAdvertElement } from './popup.js';
 
+const ADVERTS_COUNT = 10;
 const MAIN_LATITUDE = 35.68950;
 const MAIN_LONGITUDE = 139.69171;
 const LOCATION_FLOAT = 5;
@@ -26,7 +27,7 @@ const initMap = (adverts) => {
     tileLayer.addTo(map);
     activateAdForm();
     setAddress();
-    setMarkers(adverts);
+    setMarkers(adverts.slice(0, ADVERTS_COUNT));
     initMainMarker();
   })
     .setView({
@@ -36,14 +37,14 @@ const initMap = (adverts) => {
 };
 
 const initMainMarker = () => {
-  mainMarker.addTo(map),
+  mainMarker.addTo(map);
 
   mainMarker.on('moveend', (evt) => {
     const coords = evt.target.getLatLng();
     const lat = coords.lat.toFixed(LOCATION_FLOAT);
     const lng = coords.lng.toFixed(LOCATION_FLOAT);
     address.value = `${lat}, ${lng}`;
-  })
+  });
 };
 
 const setMarkers = (adverts) => {
@@ -68,7 +69,7 @@ const setMarkers = (adverts) => {
           keepInView: true,
         })
     markers.push(marker);
-  })
+  });
 };
 
 const resetMainMarker = () => {
@@ -79,7 +80,7 @@ const resetMainMarker = () => {
 const removeMarkers = () => {
   markers.forEach(marker => {
     marker.remove();
-  })
+  });
 };
 
 const setAddress = () => {

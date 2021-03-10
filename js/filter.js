@@ -18,7 +18,7 @@ const deactivateFilterForm = () => {
   mapFiltersForm.classList.add('map__filters--disabled');
   mapFilters.forEach((filter) => {
     filter.setAttribute('disabled', '');
-  })
+  });
   mapFeatures.setAttribute('disabled', 'disabled');
 };
 
@@ -26,7 +26,7 @@ const activateFilterForm = () => {
   mapFiltersForm.classList.remove('map__filters--disabled');
   mapFilters.forEach((filter) => {
     filter.removeAttribute('disabled');
-  })
+  });
   mapFeatures.removeAttribute('disabled');
 };
 
@@ -39,7 +39,7 @@ const initResetButtonListener = (adverts) => {
     removeMarkers();
     setMarkers(adverts);
   });
-}
+};
 
 const featuresFilter = (advert) => {
   const checkedFeatures = mapFiltersForm.querySelectorAll('.map__checkbox:checked');
@@ -47,7 +47,7 @@ const featuresFilter = (advert) => {
   checkedFeatures.forEach((feature) => {
     if (advert.offer.features.includes(feature.value))
       i++;
-  })
+  });
   return i === checkedFeatures.length;
 };
 
