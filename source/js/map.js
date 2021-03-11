@@ -1,5 +1,4 @@
-/* global L:readonly */
-
+import L from 'leaflet';
 import { address, activateAdForm } from './form.js';
 import { createAdvertElement } from './popup.js';
 
