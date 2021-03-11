@@ -1,5 +1,3 @@
-/* global L:readonly */
-
 import { address, activateAdForm } from './form.js';
 import { createAdvertElement } from './popup.js';
 
