@@ -76,6 +76,7 @@ const setMarkers = (adverts) => {
 const resetMainMarker = () => {
   mainMarker.setLatLng(new L.LatLng(MAIN_LATITUDE, MAIN_LONGITUDE));
   map.setView(new L.LatLng(MAIN_LATITUDE, MAIN_LONGITUDE), MAIN_ZOOM);
+  address.value = `${MAIN_LATITUDE}, ${MAIN_LONGITUDE}`;
 };
 
 const removeMarkers = () => {
@@ -88,4 +89,10 @@ const setAddress = () => {
   address.value = `${MAIN_LATITUDE}, ${MAIN_LONGITUDE}`;
 };
 
-export { initMap, setAddress, resetMainMarker, markers, setMarkers, removeMarkers }
+const setMarkersToDefaultState = (adverts) => {
+  removeMarkers();
+  resetMainMarker();
+  setMarkers(adverts);
+};
+
+export { initMap, setAddress, removeMarkers, setMarkers, setMarkersToDefaultState }

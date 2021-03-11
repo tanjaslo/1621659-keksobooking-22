@@ -1,10 +1,10 @@
 const FILE_TYPES = ['gif', 'jpg', 'jpeg', 'png'];
-const DEFAULT_AVATAR_SRC = 'img/muffin-grey.svg';
+const DEFAULT_SRC = 'img/muffin-grey.svg';
 const PREVIEW_SIZE = 70;
 
-const avatarUploader = document.querySelector('.ad-form__field input[type=file]');
+const avatarUploader = document.querySelector('#avatar');
 const avatarPreview = document.querySelector('.ad-form-header__preview img');
-const housingPhotoUploader = document.querySelector('.ad-form__upload input[type=file]');
+const housingPhotoUploader = document.querySelector('#images');
 const housingPhotoContainer = document.querySelector('.ad-form__photo');
 const housingPhotoPreview = document.createElement('img');
 
@@ -35,8 +35,8 @@ const initImageUploaders = () => {
 };
 
 const clearPreview = () => {
-  avatarPreview.src = DEFAULT_AVATAR_SRC;
+  avatarPreview.src = DEFAULT_SRC;
   housingPhotoPreview.src = '';
-}
+};
 
 export { initImageUploaders, clearPreview }
