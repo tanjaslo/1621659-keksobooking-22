@@ -3,7 +3,7 @@ import { showSuccessMessage, showErrorMessage } from './message.js';
 import { setAddress, resetMainMarker } from './map.js';
 import { deactivateFilterForm, activateFilterForm } from './filter.js';
 import { getHousingPrice } from './util.js';
-import { initPhotoUploaders, clearPreview } from './photo.js';
+import { initImageUploaders, clearPreview } from './photo.js';
 
 const adForm = document.querySelector('.ad-form');
 const address = document.querySelector('#address');
@@ -35,7 +35,7 @@ const activateAdForm = () => {
   });
   address.setAttribute('readonly', 'readonly');
   activateFilterForm();
-  initPhotoUploaders();
+  initImageUploaders();
 };
 
 const initListeners = () => {
@@ -102,6 +102,7 @@ const setAdFormSubmit = () => {
       () => {
         showSuccessMessage();
         adForm.reset();
+        clearPreview();
         resetMainMarker();
         setAddress();
       },

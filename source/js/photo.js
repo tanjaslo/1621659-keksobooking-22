@@ -26,7 +26,7 @@ const handleFiles = (fileChooser, preview) => {
   };
 };
 
-const initPhotoUploaders = () => {
+const initImageUploaders = () => {
   avatarUploader.addEventListener('change', handleFiles(avatarUploader, avatarPreview));
   housingPhotoUploader.addEventListener('change', handleFiles(housingPhotoUploader, housingPhotoPreview));
   housingPhotoPreview.height = PREVIEW_SIZE;
@@ -39,4 +39,4 @@ const clearPreview = () => {
   housingPhotoPreview.src = '';
 }
 
-export { initPhotoUploaders, clearPreview }
+export { initImageUploaders, clearPreview }

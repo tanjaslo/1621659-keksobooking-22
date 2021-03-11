@@ -1,3 +1,4 @@
+import 'leaflet/dist/leaflet.css';
 import './message.js';
 import './popup.js';
 import './photo.js';
