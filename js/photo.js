@@ -5,7 +5,7 @@ const PREVIEW_SIZE = 70;
 const avatarUploader = document.querySelector('.ad-form__field input[type=file]');
 const avatarPreview = document.querySelector('.ad-form-header__preview img');
 const housingPhotoUploader = document.querySelector('.ad-form__upload input[type=file]');
-const housingPhotoForm = document.querySelector('.ad-form__photo');
+const housingPhotoContainer = document.querySelector('.ad-form__photo');
 const housingPhotoPreview = document.createElement('img');
 
 const handleFiles = (fileChooser, preview) => {
@@ -26,12 +26,12 @@ const handleFiles = (fileChooser, preview) => {
   };
 };
 
-const initPhotoAploaders = () => {
+const initPhotoUploaders = () => {
   avatarUploader.addEventListener('change', handleFiles(avatarUploader, avatarPreview));
   housingPhotoUploader.addEventListener('change', handleFiles(housingPhotoUploader, housingPhotoPreview));
   housingPhotoPreview.height = PREVIEW_SIZE;
   housingPhotoPreview.width = PREVIEW_SIZE;
-  housingPhotoForm.append(housingPhotoPreview);
+  housingPhotoContainer.append(housingPhotoPreview);
 };
 
 const clearPreview = () => {
@@ -39,4 +39,4 @@ const clearPreview = () => {
   housingPhotoPreview.src = '';
 }
 
-export { initPhotoAploaders, clearPreview }
+export { initPhotoUploaders, clearPreview }
