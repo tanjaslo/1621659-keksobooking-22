@@ -45,8 +45,9 @@ const featuresFilter = (advert) => {
   const checkedFeatures = mapFiltersForm.querySelectorAll('.map__checkbox:checked');
   let i = 0;
   checkedFeatures.forEach((feature) => {
-    if (advert.offer.features.includes(feature.value))
+    if (advert.offer.features.includes(feature.value)) {
       i++;
+    }
   });
   return i === checkedFeatures.length;
 };
