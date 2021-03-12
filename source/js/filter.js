@@ -70,7 +70,7 @@ const isAdvertMatched = (advert) => {
   roomsFilter(advert) &&
   capacityFilter(advert) &&
   priceFilter(advert) &&
-  typeFilter(advert)
+  typeFilter(advert);
 };
 
 const getFilteredAdverts = (adverts) => {

@@ -31,8 +31,6 @@ const showSuccessMessage = () => {
 const showErrorMessage = () => {
   const errorMessage = errorTemplate.cloneNode(true);
   showMessage(errorMessage);
-  const closeButton = errorMessage.querySelector('.error__button');
-  closeButton.addEventListener('click', onClick);
 };
 
 const removeMessage = () => {
