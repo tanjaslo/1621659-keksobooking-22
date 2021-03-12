@@ -2,7 +2,6 @@ import { isEscEvent } from './util.js';
 
 const successTemplate = document.querySelector('#success').content.querySelector('.success');
 const errorTemplate = document.querySelector('#error').content.querySelector('.error');
-const closeButton = document.querySelector('.error__button');
 
 const onPopupEscKeydown = (evt) => {
   if (isEscEvent(evt)) {
@@ -32,6 +31,7 @@ const showSuccessMessage = () => {
 const showErrorMessage = () => {
   const errorMessage = errorTemplate.cloneNode(true);
   showMessage(errorMessage);
+  const closeButton = errorMessage.querySelector('.error__button');
   closeButton.addEventListener('click', onClick);
 };
 
@@ -39,7 +39,6 @@ const removeMessage = () => {
   document.querySelectorAll('.success, .error').forEach((message) => message.remove());
   document.removeEventListener('click', onClick);
   document.removeEventListener('keydown', onPopupEscKeydown);
-  closeButton.removeEventListener('click', onClick);
 };
 
 export { showSuccessMessage, showErrorMessage }
