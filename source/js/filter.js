@@ -30,17 +30,6 @@ const activateFilterForm = () => {
   mapFeatures.removeAttribute('disabled');
 };
 
-const initResetButtonListener = (adverts) => {
-  const buttonReset = document.querySelector('.ad-form__reset');
-  buttonReset.addEventListener('click', (evt) => {
-    evt.preventDefault();
-
-    mapFiltersForm.reset();
-    removeMarkers();
-    setMarkers(adverts);
-  });
-};
-
 const featuresFilter = (advert) => {
   const checkedFeatures = mapFiltersForm.querySelectorAll('.map__checkbox:checked');
   let i = 0;
@@ -114,4 +103,4 @@ const initFilterChangeListener = (adverts) => {
   mapFiltersForm.addEventListener('change', () => debouncedOnFilterChange(adverts));
 };
 
-export { deactivateFilterForm, activateFilterForm, initResetButtonListener, initFilterChangeListener }
+export { mapFiltersForm, deactivateFilterForm, activateFilterForm, initFilterChangeListener }

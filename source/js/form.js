@@ -1,19 +1,19 @@
 import { sendData } from './api.js';
-import { showSuccessMessage, showErrorMessage } from './message.js';
-import { setAddress, resetMainMarker } from './map.js';
-import { deactivateFilterForm, activateFilterForm } from './filter.js';
 import { getHousingPrice } from './util.js';
+import { deactivateFilterForm, activateFilterForm, mapFiltersForm } from './filter.js';
+import { showSuccessMessage, showErrorMessage } from './message.js';
+import { setAddress, setMarkersToDefaultState } from './map.js';
 import { initImageUploaders, clearPreview } from './photo.js';
 
 const adForm = document.querySelector('.ad-form');
-const address = document.querySelector('#address');
-const typeList = document.querySelector('#type');
-const priceInput = document.querySelector('#price');
-const checkInList = document.querySelector('#timein');
-const checkOutList = document.querySelector('#timeout');
-const advertTitle = document.querySelector('#title');
-const roomNumber = document.querySelector('#room_number');
-const roomCapacity = document.querySelector('#capacity');
+const address = adForm.querySelector('#address');
+const typeList = adForm.querySelector('#type');
+const priceInput = adForm.querySelector('#price');
+const checkInList = adForm.querySelector('#timein');
+const checkOutList = adForm.querySelector('#timeout');
+const advertTitle = adForm.querySelector('#title');
+const roomNumber = adForm.querySelector('#room_number');
+const roomCapacity = adForm.querySelector('#capacity');
 const optionCapacity = roomCapacity.querySelectorAll('option');
 
 const MAX_ROOMS_NUMBER = 100;
@@ -94,17 +94,21 @@ const setFormValidity = () => {
   });
 };
 
-const setAdFormSubmit = () => {
+const resetToDefaultState = (adverts) => {
+  adForm.reset();
+  mapFiltersForm.reset();
+  setMarkersToDefaultState(adverts);
+  setAddress();
+  clearPreview();
+};
+
+const onAdFormSubmit = (adverts) => {
   adForm.addEventListener('submit', (evt) => {
     evt.preventDefault();
-
     sendData(
       () => {
         showSuccessMessage();
-        adForm.reset();
-        clearPreview();
-        resetMainMarker();
-        setAddress();
+        resetToDefaultState(adverts);
       },
       () => showErrorMessage(),
       new FormData(evt.target),
@@ -112,15 +116,12 @@ const setAdFormSubmit = () => {
   });
 };
 
-const setAdFormReset = () => {
-  const buttonReset = adForm.querySelector('.ad-form__reset');
+const onAdFormReset = (adverts) => {
+  const buttonReset = document.querySelector('.ad-form__reset');
   buttonReset.addEventListener('click', (evt) => {
     evt.preventDefault();
-    adForm.reset();
-    clearPreview();
-    resetMainMarker();
-    setAddress();
+    resetToDefaultState(adverts);
   });
 };
 
-export { address, deactivateAdForm, activateAdForm, initListeners, setFormValidity, setAdFormSubmit, setAdFormReset }
+export { address, deactivateAdForm, activateAdForm, initListeners, setFormValidity, onAdFormSubmit, onAdFormReset }

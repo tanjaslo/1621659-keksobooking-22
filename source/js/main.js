@@ -5,13 +5,14 @@ import './photo.js';
 import { getData } from './api.js';
 import { initMap } from './map.js';
 import { showAlert } from './util.js';
-import { initResetButtonListener, initFilterChangeListener } from './filter.js';
-import { deactivateAdForm, initListeners, setFormValidity, setAdFormSubmit, setAdFormReset } from './form.js';
+import { initFilterChangeListener } from './filter.js';
+import { deactivateAdForm, initListeners, setFormValidity, onAdFormSubmit, onAdFormReset } from './form.js';
 
 getData((adverts) => {
   initMap(adverts);
-  initResetButtonListener(adverts);
   initFilterChangeListener(adverts);
+  onAdFormSubmit(adverts);
+  onAdFormReset(adverts);
 },
 (error) => {
   deactivateAdForm();
@@ -20,7 +21,5 @@ getData((adverts) => {
 
 initListeners();
 setFormValidity();
-setAdFormSubmit();
-setAdFormReset();
 
 
