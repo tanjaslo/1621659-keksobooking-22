@@ -30,11 +30,11 @@ const activateFilterForm = () => {
   mapFeatures.removeAttribute('disabled');
 };
 
-const featuresFilter = (advert) => {
+const featuresFilter = ({offer}) => {
   const checkedFeatures = mapFiltersForm.querySelectorAll('.map__checkbox:checked');
   let i = 0;
   checkedFeatures.forEach((feature) => {
-    if (advert.offer.features.includes(feature.value)) {
+    if (offer.features.includes(feature.value)) {
       i++;
     }
   });
